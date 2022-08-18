@@ -2,7 +2,7 @@
 
 ## Stack
 
-### Architecture: MVC
+### Architecture: MVP
 
 ### DataBase: CoreData
 
