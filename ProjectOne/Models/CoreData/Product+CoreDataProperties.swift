@@ -9,9 +9,7 @@
 import Foundation
 import CoreData
 
-
 extension Product {
-
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Product> {
         return NSFetchRequest<Product>(entityName: "Product")
     }
@@ -24,9 +22,7 @@ extension Product {
     @NSManaged public var describtion: String?
     @NSManaged public var image: Data?
     @NSManaged public var date: Date?
-
 }
 
-extension Product : Identifiable {
-
+extension Product: Identifiable {
 }

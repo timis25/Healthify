@@ -11,5 +11,4 @@ import CoreData
 
 @objc(DayliNutrion)
 public class DayliNutrion: NSManagedObject {
-
 }

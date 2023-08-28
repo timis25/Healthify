@@ -11,13 +11,15 @@ import CoreData
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
         prepareWindow()
-        
         return true
     }
-    
+
     private func prepareWindow() {
         window = UIWindow()
         let navigationController = UINavigationController()
@@ -25,8 +27,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let dataStoreManager = DataStoreManager()
         let tabBarController = UITabBarController()
         tabBarController.setDefaultApearance()
-        let router = Router(navigationController: navigationController, assembly: assembly, dataStorage: dataStoreManager, window: window!, tabBarController: tabBarController)
-        
+        let router = Router(
+            navigationController: navigationController,
+            assembly: assembly,
+            dataStorage: dataStoreManager,
+            window: window!,
+            tabBarController: tabBarController
+        )
+
         if UserSettings.isShowStartProfileSettings() {
             router.initMainScreens()
             window?.rootViewController = tabBarController
@@ -36,5 +44,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         window?.makeKeyAndVisible()
     }
-
 }

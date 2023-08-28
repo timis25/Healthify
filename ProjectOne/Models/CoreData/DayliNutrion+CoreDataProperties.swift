@@ -9,9 +9,7 @@
 import Foundation
 import CoreData
 
-
 extension DayliNutrion {
-
     @nonobjc public class func fetchRequest() -> NSFetchRequest<DayliNutrion> {
         return NSFetchRequest<DayliNutrion>(entityName: "DayliNutrion")
     }
@@ -20,9 +18,7 @@ extension DayliNutrion {
     @NSManaged public var carbs: Int16
     @NSManaged public var protein: Int16
     @NSManaged public var fats: Int16
-
 }
 
-extension DayliNutrion : Identifiable {
-
+extension DayliNutrion: Identifiable {
 }

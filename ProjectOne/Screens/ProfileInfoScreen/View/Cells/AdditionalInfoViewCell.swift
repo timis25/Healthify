@@ -23,8 +23,8 @@ class AdditionalInfoViewCell: UITableViewCell {
     private var pickerData = [PhysicalStateModel]()
     private let toolBar = UIToolbar()
     var selectedType: PhysicalStateModel?
-    var delegate: AdditionalInfoViewCelDelegate?
-    
+    weak var delegate: AdditionalInfoViewCelDelegate?
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setPickerData()
@@ -35,17 +35,20 @@ class AdditionalInfoViewCell: UITableViewCell {
         configurePhyscPicker()
         configureToolBar()
     }
-    
+
     private func configureToolBar() {
-        let doneBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneBarButtonAction))
+        let doneBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .done,
+            target: self,
+            action: #selector(doneBarButtonAction)
+        )
         let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         toolBar.sizeToFit()
         toolBar.setItems([space, doneBarButtonItem], animated: true)
-        
     }
-    
+
     private func configureSelectorSex() {
-        self.selectorSex = UISegmentedControl(items: [R.string.locale.profileMale(), R.string.locale.profileFemale()])
+        self.selectorSex = UISegmentedControl(items: [R.string.locales.profileMale(), R.string.locales.profileFemale()])
         view.addSubview(selectorSex)
         selectorSex.backgroundColor = UIColor(hex: "#90e0ef", alpha: 1)
         selectorSex.selectedSegmentIndex = 0
@@ -58,25 +61,24 @@ class AdditionalInfoViewCell: UITableViewCell {
             make.top.equalTo(mainLabel.snp.bottom).offset(20)
         }
     }
-    
+
     private func setPickerData() {
-        pickerData.append(PhysicalStateModel(id: 1, description: R.string.locale.physxState1()))
-        pickerData.append(PhysicalStateModel(id: 2, description: R.string.locale.physxState2()))
-        pickerData.append(PhysicalStateModel(id: 3, description: R.string.locale.physxState3()))
-        pickerData.append(PhysicalStateModel(id: 4, description: R.string.locale.physxState4()))
-        pickerData.append(PhysicalStateModel(id: 5, description: R.string.locale.physxState5()))
+        pickerData.append(PhysicalStateModel(id: 1, description: R.string.locales.physxState1()))
+        pickerData.append(PhysicalStateModel(id: 2, description: R.string.locales.physxState2()))
+        pickerData.append(PhysicalStateModel(id: 3, description: R.string.locales.physxState3()))
+        pickerData.append(PhysicalStateModel(id: 4, description: R.string.locales.physxState4()))
+        pickerData.append(PhysicalStateModel(id: 5, description: R.string.locales.physxState5()))
     }
-    
+
     private func configurePhyscPicker() {
         physcPicker.dataSource = self
         physcPicker.delegate = self
-        
     }
-    
+
     private func configureMainLabel() {
         view.addSubview(mainLabel)
-        
-        mainLabel.text = R.string.locale.profileAdditionalInfo()
+
+        mainLabel.text = R.string.locales.profileAdditionalInfo()
         mainLabel.font = .systemFont(ofSize: 20)
         mainLabel.textColor = .white
         mainLabel.snp.makeConstraints { make in
@@ -84,20 +86,20 @@ class AdditionalInfoViewCell: UITableViewCell {
             make.centerX.equalToSuperview()
         }
     }
-    
+
     private func configurePhysicalStateTextField() {
         view.addSubview(physicalStateTextField)
-        
+
         physicalStateTextField.inputView = physcPicker
         physicalStateTextField.font = .systemFont(ofSize: 18)
         physicalStateTextField.backgroundColor = UIColor(hex: "#90e0ef", alpha: 1)
         physicalStateTextField.layer.cornerRadius = 10
         physicalStateTextField.isScrollEnabled = false
         physicalStateTextField.delegate = self
-        physicalStateTextField.text = R.string.locale.profileEnterPhysxState()
+        physicalStateTextField.text = R.string.locales.profileEnterPhysxState()
         physicalStateTextField.textColor = .black
         physicalStateTextField.inputAccessoryView = toolBar
-        
+
         physicalStateTextField.snp.makeConstraints { make in
             make.bottom.equalTo(-10)
             make.top.equalTo(selectorSex.snp.bottom).offset(10)
@@ -105,14 +107,14 @@ class AdditionalInfoViewCell: UITableViewCell {
             make.left.equalTo(5)
         }
     }
-    
+
     private func configureView() {
         contentView.addSubview(view)
-        
+
         view.backgroundColor = UIColor(hex: "#0077b6", alpha: 1)
         view.layer.cornerRadius = 12
         view.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
-        
+
         view.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.width.equalToSuperview().inset(25)
@@ -120,19 +122,19 @@ class AdditionalInfoViewCell: UITableViewCell {
             make.bottom.equalToSuperview()
         }
     }
-    
+
     @objc func doneBarButtonAction() {
         if let selectedType = selectedType {
             delegate?.sendPhysicalState(data: selectedType)
             view.endEditing(true)
         } else {
             physicalStateTextField.text = pickerData.first?.description
-            
+
             delegate?.textEditDidChange(physicalStateTextField.text)
             delegate?.sendPhysicalState(data: pickerData.first!)
         }
     }
-    
+
     @objc func selectorSexAction() {
         if selectorSex.selectedSegmentIndex == 0 {
             delegate?.sendSex(isMale: true)
@@ -140,27 +142,25 @@ class AdditionalInfoViewCell: UITableViewCell {
             delegate?.sendSex(isMale: false)
         }
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
 extension AdditionalInfoViewCell: UIPickerViewDataSource, UIPickerViewDelegate {
-    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return pickerData.count
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return pickerData.map({ $0.description })[row]
-        
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let text = pickerData.map({ $0.description })[row]
         physicalStateTextField.text = text

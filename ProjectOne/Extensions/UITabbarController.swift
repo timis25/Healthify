@@ -10,15 +10,9 @@ import UIKit
 
 extension UITabBarController {
     func setDefaultApearance() {
-        if #available(iOS 13.0, *) {
-            let appearance = tabBar.standardAppearance
-            appearance.shadowImage = nil
-            appearance.shadowColor = nil
-            tabBar.standardAppearance = appearance
-        } else {
-            tabBar.barTintColor = .white
-            tabBar.shadowImage = UIImage()
-            tabBar.backgroundImage = UIImage()
-        }
+        let appearance = tabBar.standardAppearance
+        appearance.shadowImage = nil
+        appearance.shadowColor = nil
+        tabBar.standardAppearance = appearance
     }
 }

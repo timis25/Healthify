@@ -10,7 +10,6 @@ import Foundation
 import CoreData
 
 extension User {
-
     @nonobjc public class func fetchRequest() -> NSFetchRequest<User> {
         return NSFetchRequest<User>(entityName: "User")
     }
@@ -21,9 +20,7 @@ extension User {
     @NSManaged public var weight: Int16
     @NSManaged public var birthday: String?
     @NSManaged public var isMale: Bool
-
 }
 
-extension User : Identifiable {
-
+extension User: Identifiable {
 }

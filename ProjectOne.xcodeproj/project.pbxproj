@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -30,17 +30,17 @@
 		0770156E26F77A4100369B78 /* NameViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0770156D26F77A4100369B78 /* NameViewCell.swift */; };
 		0770157026F78AE300369B78 /* AgeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0770156F26F78AE300369B78 /* AgeViewCell.swift */; };
 		0770157226F87E1C00369B78 /* AdditionalInfoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0770157126F87E1C00369B78 /* AdditionalInfoViewCell.swift */; };
-		0779B4FF26E4BE5500838FCA /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0779B4FE26E4BE5500838FCA /* R.generated.swift */; };
 		0779B50326E4D37C00838FCA /* Health.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0779B50126E4D37C00838FCA /* Health.xcdatamodeld */; };
 		0779B50626E4D5EB00838FCA /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0779B50426E4D5EB00838FCA /* User+CoreDataClass.swift */; };
 		0779B50726E4D5EB00838FCA /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0779B50526E4D5EB00838FCA /* User+CoreDataProperties.swift */; };
 		0779B50A26E4DA9600838FCA /* DataStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0779B50926E4DA9600838FCA /* DataStoreManager.swift */; };
 		0779B51026EA290100838FCA /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0779B50F26EA290100838FCA /* CardCell.swift */; };
+		078881512A9CF90B001557C3 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078881502A9CF90B001557C3 /* R.generated.swift */; };
 		07904D9A2701AEEE00E24264 /* StringEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07904D992701AEEE00E24264 /* StringEx.swift */; };
 		07904D9C2701AF2600E24264 /* ViewEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07904D9B2701AF2600E24264 /* ViewEx.swift */; };
 		07904D9E2701AF2F00E24264 /* ColorEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07904D9D2701AF2F00E24264 /* ColorEx.swift */; };
 		07904DA02701AFBA00E24264 /* VerticalTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07904D9F2701AFBA00E24264 /* VerticalTextView.swift */; };
-		07904DB02703306800E24264 /* locale.strings in Resources */ = {isa = PBXBuildFile; fileRef = 07904DB22703306800E24264 /* locale.strings */; };
+		07904DB02703306800E24264 /* locales.strings in Resources */ = {isa = PBXBuildFile; fileRef = 07904DB22703306800E24264 /* locales.strings */; };
 		079DC496271462D200F16087 /* AddProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079DC495271462D200F16087 /* AddProductViewController.swift */; };
 		07AA9D3B28AEA5CC00EB43E4 /* DayliNutrion+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA9D3928AEA5CC00EB43E4 /* DayliNutrion+CoreDataClass.swift */; };
 		07AA9D3C28AEA5CC00EB43E4 /* DayliNutrion+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA9D3A28AEA5CC00EB43E4 /* DayliNutrion+CoreDataProperties.swift */; };
@@ -121,19 +121,19 @@
 		0770156D26F77A4100369B78 /* NameViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameViewCell.swift; sourceTree = "<group>"; };
 		0770156F26F78AE300369B78 /* AgeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeViewCell.swift; sourceTree = "<group>"; };
 		0770157126F87E1C00369B78 /* AdditionalInfoViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInfoViewCell.swift; sourceTree = "<group>"; };
-		0779B4FE26E4BE5500838FCA /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = R.generated.swift; path = ProjectOne/Utils/R.generated.swift; sourceTree = SOURCE_ROOT; };
 		0779B50226E4D37C00838FCA /* Health.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Health.xcdatamodel; sourceTree = "<group>"; };
 		0779B50426E4D5EB00838FCA /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0779B50526E4D5EB00838FCA /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0779B50926E4DA9600838FCA /* DataStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStoreManager.swift; sourceTree = "<group>"; };
 		0779B50F26EA290100838FCA /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
+		078881502A9CF90B001557C3 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		07904D992701AEEE00E24264 /* StringEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringEx.swift; sourceTree = "<group>"; };
 		07904D9B2701AF2600E24264 /* ViewEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewEx.swift; sourceTree = "<group>"; };
 		07904D9D2701AF2F00E24264 /* ColorEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorEx.swift; sourceTree = "<group>"; };
 		07904D9F2701AFBA00E24264 /* VerticalTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalTextView.swift; sourceTree = "<group>"; };
-		07904DB12703306800E24264 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/locale.strings; sourceTree = "<group>"; };
+		07904DB12703306800E24264 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/locales.strings; sourceTree = "<group>"; };
 		07904DB32703309600E24264 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		07904DB42703309600E24264 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/locale.strings; sourceTree = "<group>"; };
+		07904DB42703309600E24264 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/locales.strings; sourceTree = "<group>"; };
 		079DC495271462D200F16087 /* AddProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductViewController.swift; sourceTree = "<group>"; };
 		07AA9D3928AEA5CC00EB43E4 /* DayliNutrion+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DayliNutrion+CoreDataClass.swift"; sourceTree = "<group>"; };
 		07AA9D3A28AEA5CC00EB43E4 /* DayliNutrion+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DayliNutrion+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -329,8 +329,7 @@
 		07AA9D4428AEA64300EB43E4 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				0779B4FE26E4BE5500838FCA /* R.generated.swift */,
-				07F4FF7A26E36B6D0052DD56 /* Info.plist */,
+				078881502A9CF90B001557C3 /* R.generated.swift */,
 				07F4FF7726E36B6D0052DD56 /* LaunchScreen.storyboard */,
 				07F4FF7526E36B6D0052DD56 /* Assets.xcassets */,
 			);
@@ -388,9 +387,10 @@
 		07F4FF6B26E36B690052DD56 /* ProjectOne */ = {
 			isa = PBXGroup;
 			children = (
+				07F4FF7A26E36B6D0052DD56 /* Info.plist */,
 				07AA9D4428AEA64300EB43E4 /* Utils */,
 				07AA9D4128AEA61500EB43E4 /* Managers */,
-				07904DB22703306800E24264 /* locale.strings */,
+				07904DB22703306800E24264 /* locales.strings */,
 				070C0B032768AD290009D319 /* ProjectOne.entitlements */,
 				073155F526FF2C52000C788E /* Extensions */,
 				0779B50826E4D66600838FCA /* Models */,
@@ -497,8 +497,8 @@
 			buildConfigurationList = 07F4FF9326E36B6E0052DD56 /* Build configuration list for PBXNativeTarget "ProjectOne" */;
 			buildPhases = (
 				DEEBC6022C47092744DA5C5C /* [CP] Check Pods Manifest.lock */,
-				0779B50026E4C20C00838FCA /* ShellScript */,
-				0779B4FD26E4BDE600838FCA /* ShellScript */,
+				0779B50026E4C20C00838FCA /* SwiftLint */,
+				0779B4FD26E4BDE600838FCA /* R Swift */,
 				07F4FF6526E36B690052DD56 /* Sources */,
 				07F4FF6626E36B690052DD56 /* Frameworks */,
 				07F4FF6726E36B690052DD56 /* Resources */,
@@ -615,7 +615,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07F4FF7926E36B6D0052DD56 /* LaunchScreen.storyboard in Resources */,
-				07904DB02703306800E24264 /* locale.strings in Resources */,
+				07904DB02703306800E24264 /* locales.strings in Resources */,
 				07F4FF7626E36B6D0052DD56 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -637,7 +637,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0779B4FD26E4BDE600838FCA /* ShellScript */ = {
+		0779B4FD26E4BDE600838FCA /* R Swift */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -647,6 +647,7 @@
 			inputPaths = (
 				"$TEMP_DIR/rswift-lastrun",
 			);
+			name = "R Swift";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -656,8 +657,9 @@
 			shellPath = /bin/sh;
 			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n\n";
 		};
-		0779B50026E4C20C00838FCA /* ShellScript */ = {
+		0779B50026E4C20C00838FCA /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -665,13 +667,14 @@
 			);
 			inputPaths = (
 			);
+			name = SwiftLint;
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning\"\nfi\n\n";
 		};
 		6219D808AA7D0CD34D9D1588 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -796,12 +799,12 @@
 				0748CE9227A00443009685B7 /* UITabbarController.swift in Sources */,
 				072EDDF3276872DB00FF8616 /* AddProductPresenter.swift.swift in Sources */,
 				079DC496271462D200F16087 /* AddProductViewController.swift in Sources */,
-				0779B4FF26E4BE5500838FCA /* R.generated.swift in Sources */,
 				07F4FF6D26E36B690052DD56 /* AppDelegate.swift in Sources */,
 				07AA9D3C28AEA5CC00EB43E4 /* DayliNutrion+CoreDataProperties.swift in Sources */,
 				0779B50A26E4DA9600838FCA /* DataStoreManager.swift in Sources */,
 				0710D8B327689383001B9E6B /* HealthyCardWidget.intentdefinition in Sources */,
 				073155F426FF2C0E000C788E /* StartButtonViewCell.swift in Sources */,
+				078881512A9CF90B001557C3 /* R.generated.swift in Sources */,
 				07F4FFA626E377080052DD56 /* Assembly.swift in Sources */,
 				07AA9D4028AEA5F000EB43E4 /* Product+CoreDataProperties.swift in Sources */,
 				0779B50626E4D5EB00838FCA /* User+CoreDataClass.swift in Sources */,
@@ -864,13 +867,13 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		07904DB22703306800E24264 /* locale.strings */ = {
+		07904DB22703306800E24264 /* locales.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				07904DB12703306800E24264 /* en */,
 				07904DB42703309600E24264 /* ru */,
 			);
-			name = locale.strings;
+			name = locales.strings;
 			sourceTree = "<group>";
 		};
 		07F4FF7726E36B6D0052DD56 /* LaunchScreen.storyboard */ = {
@@ -997,7 +1000,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1053,7 +1056,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1074,7 +1077,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5K5823VS68;
 				INFOPLIST_FILE = ProjectOne/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1097,7 +1100,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5K5823VS68;
 				INFOPLIST_FILE = ProjectOne/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

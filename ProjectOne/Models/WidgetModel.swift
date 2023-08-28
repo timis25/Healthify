@@ -8,12 +8,12 @@
 import Foundation
 
 public struct WidgetModel: Codable {
-    let dayliFats: String
-    let nowFats: String
-    let dayliCarbs: String
-    let nowCarbs: String
-    let dayliProtein: String
-    let nowProtein: String
-    let nowCallories: String
-    let dayliCallories: String
+    var dayliFats: String = ""
+    var nowFats: String = ""
+    var dayliCarbs: String = ""
+    var nowCarbs: String = ""
+    var dayliProtein: String = ""
+    var nowProtein: String = ""
+    var nowCallories: String = ""
+    var dayliCallories: String = ""
 }

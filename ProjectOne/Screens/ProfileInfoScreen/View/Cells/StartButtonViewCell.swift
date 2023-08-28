@@ -7,26 +7,26 @@
 
 import UIKit
 
-protocol StartButtonViewCellProtocol {
+protocol StartButtonViewCellProtocol: AnyObject {
     func startButtonDidTouch()
 }
 
 class StartButtonViewCell: UITableViewCell {
     let startButton = BaseButton()
-    var delegate: StartButtonViewCellProtocol?
-    
+    weak var delegate: StartButtonViewCellProtocol?
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureStartButton()
     }
-    
+
     private func configureStartButton() {
         contentView.addSubview(startButton)
-        
-        startButton.setTitle(R.string.locale.profileStart(), for: .normal)
+
+        startButton.setTitle(R.string.locales.profileStart(), for: .normal)
         startButton.backgroundColor = UIColor(hex: "#0077b6", alpha: 1)
         startButton.addTarget(self, action: #selector(startButtonAction), for: .touchUpInside)
-        
+
         startButton.snp.makeConstraints { make in
             make.top.equalTo(150)
             make.bottom.equalToSuperview().offset(-20)
@@ -35,11 +35,11 @@ class StartButtonViewCell: UITableViewCell {
             make.height.equalTo(50)
         }
     }
-    
+
     @objc func startButtonAction() {
         delegate?.startButtonDidTouch()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

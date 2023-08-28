@@ -11,24 +11,35 @@ import Intents
 
 struct Provider: IntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationIntent(), data: WidgetModel(dayliFats: "0", nowFats: "0", dayliCarbs: "0", nowCarbs: "0", dayliProtein: "0", nowProtein: "0", nowCallories: "0", dayliCallories: "0"))
+        SimpleEntry(
+            date: Date(),
+            configuration: ConfigurationIntent(),
+            data: WidgetModel()
+        )
     }
 
-    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        
+    func getSnapshot(
+        for configuration: ConfigurationIntent,
+        in context: Context,
+        completion: @escaping (SimpleEntry) -> Void
+    ) {
         let userDefaults = UserDefaults(suiteName: "group.timis.Healthtify.Widget")
         guard let data = userDefaults?.object(forKey: "dailyInfo") as? Data else { return }
-        
+
         guard let data = try? JSONDecoder().decode(WidgetModel.self, from: data) else { return }
-        
+
         let entry = SimpleEntry(date: Date(), configuration: configuration, data: data)
         completion(entry)
     }
 
-    func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+    func getTimeline(
+        for configuration: ConfigurationIntent,
+        in context: Context,
+        completion: @escaping (Timeline<Entry>) -> Void
+    ) {
         var entries: [SimpleEntry] = []
         var dataWidget: WidgetModel?
-        
+
         let userDefaults = UserDefaults(suiteName: "group.timis.Healthtify.Widget")
         if let data = userDefaults?.object(forKey: "dailyInfo") as? Data {
             if let data = try? JSONDecoder().decode(WidgetModel.self, from: data) {
@@ -55,37 +66,34 @@ struct SimpleEntry: TimelineEntry {
     let data: WidgetModel?
 }
 
-struct HealthyCardWidgetEntryView : View {
+struct HealthyCardWidgetEntryView: View {
     var entry: Provider.Entry
-    let a = false
 
     var body: some View {
         if let data = entry.data {
-        
-        VStack(alignment: .center, spacing: 10) {
-            HStack(alignment: .center, spacing: 50) {
-                VStack(alignment: .center, spacing: 10) {
-                    Text("Fats")
-                    Text("\(data.nowProtein)/\(data.dayliProtein)")
-                }
-                VStack(alignment: .center, spacing: 10) {
-                    Text("Protein")
-                    Text("\(data.nowFats)/\(data.dayliFats)")
-                    VStack(alignment: .center, spacing: 20) {
-                        Text("Callories")
-                        Text("\(data.nowCallories)/\(data.dayliCallories)")
+            VStack(alignment: .center, spacing: 10) {
+                HStack(alignment: .center, spacing: 50) {
+                    VStack(alignment: .center, spacing: 10) {
+                        Text("Fats")
+                        Text("\(data.nowProtein)/\(data.dayliProtein)")
+                    }
+                    VStack(alignment: .center, spacing: 10) {
+                        Text("Protein")
+                        Text("\(data.nowFats)/\(data.dayliFats)")
+                        VStack(alignment: .center, spacing: 20) {
+                            Text("Callories")
+                            Text("\(data.nowCallories)/\(data.dayliCallories)")
+                        }
+                    }
+                    VStack(alignment: .center, spacing: 10) {
+                        Text("Carbs")
+                        Text("\(data.nowCarbs)/\(data.dayliCarbs)")
                     }
                 }
-                VStack(alignment: .center, spacing: 10) {
-                    Text("Carbs")
-                    Text("\(data.nowCarbs)/\(data.dayliCarbs)")
+
+                HStack(alignment: .center, spacing: 50) {
                 }
             }
-            
-            HStack(alignment: .center, spacing: 50) {
-                
-            }
-        }
         } else {
             Text("Please enter your information")
         }
@@ -110,9 +118,13 @@ struct HealthyCardWidget: Widget {
 
 struct HealthyCardWidget_Previews: PreviewProvider {
     static var previews: some View {
-        
-        HealthyCardWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent(), data: WidgetModel(dayliFats: "0", nowFats: "0", dayliCarbs: "0", nowCarbs: "0", dayliProtein: "0", nowProtein: "0", nowCallories: "0", dayliCallories: "0")))
+        HealthyCardWidgetEntryView(
+            entry: SimpleEntry(
+                date: Date(),
+                configuration: ConfigurationIntent(),
+                data: WidgetModel()
+            )
+        )
             .previewContext(WidgetPreviewContext(family: .systemMedium))
-        
     }
 }

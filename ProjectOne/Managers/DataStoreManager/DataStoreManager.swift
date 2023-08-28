@@ -17,7 +17,34 @@ protocol DataStoreManagerProtocol {
     func updateDayliNutrion(newCallories: Int, newCarbs: Int, newProtein: Int, newFats: Int)
 }
 
-class DataStoreManager: DataStoreManagerProtocol {
+final class DataStoreManager: DataStoreManagerProtocol {
+    // MARK: - CoreData Stack
+
+    lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "Health")
+        container.loadPersistentStores(completionHandler: { (_, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
+
+    lazy var viewContext: NSManagedObjectContext = persistentContainer.viewContext
+
+    func saveContext() {
+        let context = persistentContainer.viewContext
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
+    }
+
+    // MARK: - Public methods
     func updateDayliNutrion(newCallories: Int, newCarbs: Int, newProtein: Int, newFats: Int) {
         if let data = getDayliNutrion()?.last {
             data.callories += Int32(newCallories)
@@ -31,13 +58,13 @@ class DataStoreManager: DataStoreManagerProtocol {
             product.protein = Int16(newProtein)
             product.fats = Int16(newFats)
         }
-        
+
         saveContext()
     }
-    
+
     func getDayliNutrion() -> [DayliNutrion]? {
         var nutrion: [DayliNutrion]?
-        
+
         do {
             if !UserSettings.isThisDay() {
                 if let result = try? viewContext.fetch(DayliNutrion.fetchRequest()) {
@@ -55,7 +82,7 @@ class DataStoreManager: DataStoreManagerProtocol {
             return nutrion
         }
     }
-    
+
     func addProduct(productName: String, callories: Int, fats: Int, carbs: Int, protein: Int) {
         let product = Product(context: viewContext)
         product.callorie = Int32(callories)
@@ -64,13 +91,13 @@ class DataStoreManager: DataStoreManagerProtocol {
         product.fats = Int16(fats)
         product.name = productName
         product.date = Date()
-        
+
         saveContext()
     }
-    
+
     func getProduct() -> [Product]? {
         var products: [Product]?
-        
+
         do {
             try products = viewContext.fetch(Product.fetchRequest())
             print(products)
@@ -79,12 +106,11 @@ class DataStoreManager: DataStoreManagerProtocol {
             print("Could not fetch request \(error), \(error.userInfo)")
             return products
         }
-        
     }
-    
+
     func getUser() -> [User]? {
         var user: [User]?
-        
+
         do {
             user = try viewContext.fetch(User.fetchRequest())
             print(user)
@@ -93,9 +119,8 @@ class DataStoreManager: DataStoreManagerProtocol {
             print("Could not fetch request \(error), \(error.userInfo)")
             return user
         }
-       
     }
-    
+
     func setUser(name: String, birthDate: String, isMale: Bool, physicalState: Int, weight: Int, height: Int) {
         let user = User(context: viewContext)
         user.name = name
@@ -104,34 +129,7 @@ class DataStoreManager: DataStoreManagerProtocol {
         user.isMale = isMale
         user.height = Int16(height)
         user.weight = Int16(weight)
-        
+
         saveContext()
-    }
-    
-    // MARK: CoreData Stack
-    
-    lazy var persistentContainer: NSPersistentContainer = {
-        
-        let container = NSPersistentContainer(name: "Health")
-        container.loadPersistentStores(completionHandler: { (_, error) in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
-        return container
-    }()
-    
-    lazy var viewContext: NSManagedObjectContext = persistentContainer.viewContext
-    
-    func saveContext() {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
-        }
     }
 }

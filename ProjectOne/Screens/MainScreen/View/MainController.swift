@@ -8,18 +8,13 @@
 import UIKit
 
 class MainViewController: UIViewController {
-
     var presenter: MainPresenterProtocol!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter.show()
     }
-
 }
 
 extension MainViewController: MainViewProtocol {
-    func setGreating(a: String) {
-        print(a)
-    }
 }
