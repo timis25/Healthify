@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct WidgetModel: Codable {
+struct WidgetModel: Codable {
     var dayliFats: String = ""
     var nowFats: String = ""
     var dayliCarbs: String = ""

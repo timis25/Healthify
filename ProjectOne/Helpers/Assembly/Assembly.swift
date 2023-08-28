@@ -7,17 +7,8 @@
 
 import UIKit
 
-protocol AssemblyProtocol {
-    func createMain(router: RouterProtocol, dataStorage: DataStoreManagerProtocol) -> UIViewController
-    func createProfileInfo(
-        router: RouterProtocol,
-        dataStorage: DataStoreManagerProtocol,
-        isShowAfterOnbording: Bool
-    ) -> UIViewController
-    func createAddProduct(router: RouterProtocol, dataStorage: DataStoreManagerProtocol) -> UIViewController
-}
-
-class Assembly: AssemblyProtocol {
+final class Assembly: AssemblyProtocol {
+    // MARK: - Public methods
     func createProfileInfo(
         router: RouterProtocol,
         dataStorage: DataStoreManagerProtocol,

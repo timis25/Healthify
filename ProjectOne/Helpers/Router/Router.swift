@@ -7,23 +7,17 @@
 
 import UIKit
 
-protocol RouterMain {
-    var navigationController: UINavigationController? { get  set }
-    var assembly: AssemblyProtocol? { get  set }
-}
-
-protocol RouterProtocol: RouterMain {
-    func initMainScreens()
-    func showInfoProfileSetting(isShowAfterOnbording: Bool)
-    func initAddProductScreen()
-}
-
-class Router: RouterProtocol {
+final class Router: RouterProtocol {
+    // MARK: - Public properties
     var navigationController: UINavigationController?
     var assembly: AssemblyProtocol?
-    var dataStorage: DataStoreManagerProtocol
-    var tabBarController: UITabBarController?
-    var window: UIWindow
+    // MARK: - Private properties
+
+    private var dataStorage: DataStoreManagerProtocol
+    private var tabBarController: UITabBarController?
+    private var window: UIWindow
+
+    // MARK: - Init
     init(
         navigationController: UINavigationController,
         assembly: AssemblyProtocol,
@@ -38,6 +32,7 @@ class Router: RouterProtocol {
         self.tabBarController = tabBarController
     }
 
+    // MARK: - Public methods
     func initMainScreens() {
         if let navigationController = navigationController {
             let window = UIApplication.shared.windows[0]

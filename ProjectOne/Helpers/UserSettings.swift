@@ -6,27 +6,33 @@
 //
 import Foundation
 
-class UserSettings {
-    // MARK: - Onboarding
+final class UserSettings {
+    // MARK: - Constants
+    private enum Constants {
+        static let isShowMainId: String = "com.userSettings.isShowMan"
+        static let isShowProfileId: String = "com.userSettings.isShowProfile"
+        static let dayTodayId: String = "com.userSettings.DayToday"
+    }
 
+    // MARK: - Public static methods
     static func isShowMain() -> Bool {
-        return UserDefaults.standard.bool(forKey: "isShowMain")
+        return UserDefaults.standard.bool(forKey: Constants.isShowMainId)
     }
 
     static func setIsShowMain(_ isShow: Bool) {
-        UserDefaults.standard.set(isShow, forKey: "isShowMain")
+        UserDefaults.standard.set(isShow, forKey: Constants.isShowMainId)
     }
 
     static func isShowStartProfileSettings() -> Bool {
-        return UserDefaults.standard.bool(forKey: "isShowProfile")
+        return UserDefaults.standard.bool(forKey: Constants.isShowProfileId)
     }
 
     static func setIsShowStartProfileSettings(_ isShow: Bool) {
-        UserDefaults.standard.set(isShow, forKey: "isShowProfile")
+        UserDefaults.standard.set(isShow, forKey: Constants.isShowProfileId)
     }
 
     static func isThisDay() -> Bool {
-        let date = UserDefaults.standard.object(forKey: "dayToday") as? Date ?? Date()
+        let date = UserDefaults.standard.object(forKey: Constants.dayTodayId) as? Date ?? Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.yy"
         let lastDate = dateFormatter.string(from: date)
@@ -35,6 +41,6 @@ class UserSettings {
     }
 
     static func setNowDay(_ date: Date) {
-        UserDefaults.standard.set(date, forKey: "dayToday")
+        UserDefaults.standard.set(date, forKey: Constants.dayTodayId)
     }
 }

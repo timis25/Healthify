@@ -37,6 +37,8 @@
 		078881562A9CFD50001557C3 /* NutritionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078881552A9CFD50001557C3 /* NutritionModel.swift */; };
 		078881582A9CFE6B001557C3 /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078881572A9CFE6B001557C3 /* ProductModel.swift */; };
 		0788815A2A9D13B2001557C3 /* DataStoreManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078881592A9D13B2001557C3 /* DataStoreManagerProtocol.swift */; };
+		0788815E2A9D17FB001557C3 /* AssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0788815D2A9D17FB001557C3 /* AssemblyProtocol.swift */; };
+		078881612A9D1859001557C3 /* RouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078881602A9D1859001557C3 /* RouterProtocol.swift */; };
 		07904D9A2701AEEE00E24264 /* String+RemoveCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07904D992701AEEE00E24264 /* String+RemoveCharacters.swift */; };
 		07904D9C2701AF2600E24264 /* UIView+CardViewGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07904D9B2701AF2600E24264 /* UIView+CardViewGradient.swift */; };
 		07904D9E2701AF2F00E24264 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07904D9D2701AF2F00E24264 /* UIColor+Hex.swift */; };
@@ -125,6 +127,8 @@
 		078881552A9CFD50001557C3 /* NutritionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionModel.swift; sourceTree = "<group>"; };
 		078881572A9CFE6B001557C3 /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
 		078881592A9D13B2001557C3 /* DataStoreManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStoreManagerProtocol.swift; sourceTree = "<group>"; };
+		0788815D2A9D17FB001557C3 /* AssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyProtocol.swift; sourceTree = "<group>"; };
+		078881602A9D1859001557C3 /* RouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterProtocol.swift; sourceTree = "<group>"; };
 		07904D992701AEEE00E24264 /* String+RemoveCharacters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+RemoveCharacters.swift"; sourceTree = "<group>"; };
 		07904D9B2701AF2600E24264 /* UIView+CardViewGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+CardViewGradient.swift"; sourceTree = "<group>"; };
 		07904D9D2701AF2F00E24264 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
@@ -263,7 +267,6 @@
 		0779B50826E4D66600838FCA /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				07AA9D4328AEA62F00EB43E4 /* CoreData */,
 				078881552A9CFD50001557C3 /* NutritionModel.swift */,
 				078881572A9CFE6B001557C3 /* ProductModel.swift */,
 				073155D026FC76F9000C788E /* PhisicalStateModel.swift */,
@@ -299,6 +302,24 @@
 			path = CustomViews;
 			sourceTree = "<group>";
 		};
+		0788815C2A9D17E4001557C3 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				07F4FFA526E377080052DD56 /* Assembly.swift */,
+				0788815D2A9D17FB001557C3 /* AssemblyProtocol.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		0788815F2A9D1850001557C3 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				07E7D79926E37C8F00B901AF /* Router.swift */,
+				078881602A9D1859001557C3 /* RouterProtocol.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		07AA9D4128AEA61500EB43E4 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -315,13 +336,6 @@
 				078881592A9D13B2001557C3 /* DataStoreManagerProtocol.swift */,
 			);
 			path = DataStoreManager;
-			sourceTree = "<group>";
-		};
-		07AA9D4328AEA62F00EB43E4 /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CoreData;
 			sourceTree = "<group>";
 		};
 		07AA9D4428AEA64300EB43E4 /* Utils */ = {
@@ -439,8 +453,8 @@
 		07F4FFA426E376A50052DD56 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				07F4FFA526E377080052DD56 /* Assembly.swift */,
-				07E7D79926E37C8F00B901AF /* Router.swift */,
+				0788815F2A9D1850001557C3 /* Router */,
+				0788815C2A9D17E4001557C3 /* Assembly */,
 				0770156226F733E800369B78 /* UserSettings.swift */,
 			);
 			path = Helpers;
@@ -814,7 +828,9 @@
 				070C0B082768B19B0009D319 /* WidgetModel.swift in Sources */,
 				0770156826F74E0D00369B78 /* ProfileInfoPresenter.swift in Sources */,
 				0770153F26F3267600369B78 /* CalloriesViewCell.swift in Sources */,
+				078881612A9D1859001557C3 /* RouterProtocol.swift in Sources */,
 				07904DA02701AFBA00E24264 /* VerticalTextView.swift in Sources */,
+				0788815E2A9D17FB001557C3 /* AssemblyProtocol.swift in Sources */,
 				07F4FFA326E3728F0052DD56 /* MainPresenter.swift in Sources */,
 				0770156326F733E800369B78 /* UserSettings.swift in Sources */,
 				0770157026F78AE300369B78 /* AgeViewCell.swift in Sources */,
