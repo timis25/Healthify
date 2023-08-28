@@ -14,7 +14,7 @@ protocol MainPresenterProtocol: AnyObject {
     init(view: MainViewProtocol, router: RouterProtocol, dataStorageManager: DataStoreManagerProtocol)
     func getUserNutrionInfo() -> [String: String]?
     func goToProfileSettings()
-    func getProducts() -> [Product]?
+    func getProducts() -> [ProductCoreData]?
     func goToAddProduct()
     func getDayliNutrion() -> [String: String]?
 }
@@ -30,7 +30,7 @@ class MainPresenter: MainPresenterProtocol {
         self.dataManager = dataStorageManager
     }
 
-    func getProducts() -> [Product]? {
+    func getProducts() -> [ProductCoreData]? {
         let products = dataManager.getProduct()
         return products
     }
@@ -40,12 +40,12 @@ class MainPresenter: MainPresenterProtocol {
         guard let userName = userInfo?.name else { return nil }
         guard let birthday = userInfo?.birthday else { return nil }
         guard let physicalState = userInfo?.physicalState else { return nil }
-        guard let isMale = userInfo?.isMale else { return nil }
+        guard let isMale = userInfo?.gender else { return nil }
         guard let height = userInfo?.height else { return nil }
         guard let weight = userInfo?.weight else { return nil }
 
         let calloriesFormula = calculateCalories(
-            isMale: isMale,
+            isMale: (isMale != 0),
             weight: Int(weight),
             height: Int(height),
             birthday: birthday

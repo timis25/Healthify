@@ -12,7 +12,7 @@ protocol ProfileInfoViewProtocol: AnyObject {
 
 protocol ProfileInfoPresenterProtocol: AnyObject {
     init(view: ProfileInfoViewProtocol, router: RouterProtocol, dataStorageManager: DataStoreManagerProtocol)
-    func setUser(name: String, birthDate: String, isMale: Bool, physicalState: Int, weight: Int, height: Int)
+//    func setUser(name: String, birthDate: String, isMale: Bool, physicalState: Int, weight: Int, height: Int)
 }
 
 class ProfileInfoPresenter: ProfileInfoPresenterProtocol {
@@ -26,15 +26,15 @@ class ProfileInfoPresenter: ProfileInfoPresenterProtocol {
         self.dataManager = dataStorageManager
     }
 
-    func setUser(name: String, birthDate: String, isMale: Bool, physicalState: Int, weight: Int, height: Int) {
-        dataManager.setUser(
-            name: name,
-            birthDate: birthDate,
-            isMale: isMale,
-            physicalState: physicalState,
-            weight: weight,
-            height: height
-        )
+    func setUser(_ user: UserCoreData) {
+//        dataManager.setUser(
+//            name: name,
+//            birthDate: birthDate,
+//            isMale: isMale,
+//            physicalState: physicalState,
+//            weight: weight,
+//            height: height
+//        )
         router.initMainScreens()
         UserSettings.setIsShowStartProfileSettings(true)
         UserSettings.setNowDay(Date())

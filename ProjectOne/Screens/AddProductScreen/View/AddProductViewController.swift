@@ -7,7 +7,10 @@
 
 import UIKit
 
-class AddProductViewController: UIViewController {
+protocol AddProductViewProtocol: AnyObject {
+}
+
+final class AddProductViewController: UIViewController {
     // MARK: - UIElemets
     private let mainView = UIView()
     private let mainLabel = UILabel()
@@ -194,18 +197,24 @@ class AddProductViewController: UIViewController {
 private extension AddProductViewController {
     // MARK: - Actions
     @objc func addButtonAction() {
-        let callories = calloriesTextField.text?.removeCharacters(from: CharacterSet.decimalDigits.inverted) ?? ""
-        let fats = fatsTextField.text?.removeCharacters(from: CharacterSet.decimalDigits.inverted) ?? ""
-        let carbs = carbsTextField.text?.removeCharacters(from: CharacterSet.decimalDigits.inverted) ?? ""
-        let protein = proteinTextField.text?.removeCharacters(from: CharacterSet.decimalDigits.inverted) ?? ""
+        guard let calloriesText = calloriesTextField.text,
+              let fatsText = fatsTextField.text,
+              let carbsText = carbsTextField.text,
+              let proteinText = proteinTextField.text else {
+            return
+        }
+
+        let callories = Int(calloriesText.removeCharacters(from: CharacterSet.decimalDigits.inverted)) ?? 0
+        let fats = Int(fatsText.removeCharacters(from: CharacterSet.decimalDigits.inverted)) ?? 0
+        let carbs = Int(carbsText.removeCharacters(from: CharacterSet.decimalDigits.inverted)) ?? 0
+        let proteins = Int(proteinText.removeCharacters(from: CharacterSet.decimalDigits.inverted)) ?? 0
         let productName = productNameTextField.text ?? ""
-        presenter.addProduct(
-            productName: productName,
-            callories: Int(callories)!,
-            fats: Int(fats)!,
-            carbs: Int(carbs)!,
-            protein: Int(protein)!
-        )
+
+        var productModel = ProductModel()
+        productModel.productName = productName
+        productModel.nutrition = NutritionModel(fats: fats, carbs: carbs, proteins: proteins, callories: callories)
+
+        presenter.addProduct(productModel)
         navigationController?.popViewController(animated: true)
     }
 

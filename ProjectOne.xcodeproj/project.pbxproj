@@ -16,7 +16,7 @@
 		0710D8B227689383001B9E6B /* HealthyCardWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0710D8AE27689381001B9E6B /* HealthyCardWidget.intentdefinition */; };
 		0710D8B327689383001B9E6B /* HealthyCardWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0710D8AE27689381001B9E6B /* HealthyCardWidget.intentdefinition */; };
 		0710D8B627689383001B9E6B /* HealthyCardWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0710D8A627689381001B9E6B /* HealthyCardWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		072EDDF3276872DB00FF8616 /* AddProductPresenter.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072EDDF2276872DB00FF8616 /* AddProductPresenter.swift.swift */; };
+		072EDDF3276872DB00FF8616 /* AddProductPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072EDDF2276872DB00FF8616 /* AddProductPresenter.swift */; };
 		073155D126FC76F9000C788E /* PhisicalStateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073155D026FC76F9000C788E /* PhisicalStateModel.swift */; };
 		073155F426FF2C0E000C788E /* StartButtonViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073155F326FF2C0E000C788E /* StartButtonViewCell.swift */; };
 		073155F726FF2C6E000C788E /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073155F626FF2C6E000C788E /* BaseButton.swift */; };
@@ -31,21 +31,18 @@
 		0770157026F78AE300369B78 /* AgeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0770156F26F78AE300369B78 /* AgeViewCell.swift */; };
 		0770157226F87E1C00369B78 /* AdditionalInfoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0770157126F87E1C00369B78 /* AdditionalInfoViewCell.swift */; };
 		0779B50326E4D37C00838FCA /* Health.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0779B50126E4D37C00838FCA /* Health.xcdatamodeld */; };
-		0779B50626E4D5EB00838FCA /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0779B50426E4D5EB00838FCA /* User+CoreDataClass.swift */; };
-		0779B50726E4D5EB00838FCA /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0779B50526E4D5EB00838FCA /* User+CoreDataProperties.swift */; };
 		0779B50A26E4DA9600838FCA /* DataStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0779B50926E4DA9600838FCA /* DataStoreManager.swift */; };
 		0779B51026EA290100838FCA /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0779B50F26EA290100838FCA /* CardCell.swift */; };
 		078881512A9CF90B001557C3 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078881502A9CF90B001557C3 /* R.generated.swift */; };
+		078881562A9CFD50001557C3 /* NutritionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078881552A9CFD50001557C3 /* NutritionModel.swift */; };
+		078881582A9CFE6B001557C3 /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078881572A9CFE6B001557C3 /* ProductModel.swift */; };
+		0788815A2A9D13B2001557C3 /* DataStoreManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078881592A9D13B2001557C3 /* DataStoreManagerProtocol.swift */; };
 		07904D9A2701AEEE00E24264 /* StringEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07904D992701AEEE00E24264 /* StringEx.swift */; };
 		07904D9C2701AF2600E24264 /* ViewEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07904D9B2701AF2600E24264 /* ViewEx.swift */; };
 		07904D9E2701AF2F00E24264 /* ColorEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07904D9D2701AF2F00E24264 /* ColorEx.swift */; };
 		07904DA02701AFBA00E24264 /* VerticalTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07904D9F2701AFBA00E24264 /* VerticalTextView.swift */; };
 		07904DB02703306800E24264 /* locales.strings in Resources */ = {isa = PBXBuildFile; fileRef = 07904DB22703306800E24264 /* locales.strings */; };
 		079DC496271462D200F16087 /* AddProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079DC495271462D200F16087 /* AddProductViewController.swift */; };
-		07AA9D3B28AEA5CC00EB43E4 /* DayliNutrion+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA9D3928AEA5CC00EB43E4 /* DayliNutrion+CoreDataClass.swift */; };
-		07AA9D3C28AEA5CC00EB43E4 /* DayliNutrion+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA9D3A28AEA5CC00EB43E4 /* DayliNutrion+CoreDataProperties.swift */; };
-		07AA9D3F28AEA5F000EB43E4 /* Product+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA9D3D28AEA5F000EB43E4 /* Product+CoreDataClass.swift */; };
-		07AA9D4028AEA5F000EB43E4 /* Product+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA9D3E28AEA5F000EB43E4 /* Product+CoreDataProperties.swift */; };
 		07E7D79A26E37C8F00B901AF /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E7D79926E37C8F00B901AF /* Router.swift */; };
 		07F4FF6D26E36B690052DD56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F4FF6C26E36B690052DD56 /* AppDelegate.swift */; };
 		07F4FF7126E36B690052DD56 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F4FF7026E36B690052DD56 /* MainViewController.swift */; };
@@ -107,7 +104,7 @@
 		0710D8AE27689381001B9E6B /* HealthyCardWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = HealthyCardWidget.intentdefinition; sourceTree = "<group>"; };
 		0710D8AF27689383001B9E6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0710D8B127689383001B9E6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		072EDDF2276872DB00FF8616 /* AddProductPresenter.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductPresenter.swift.swift; sourceTree = "<group>"; };
+		072EDDF2276872DB00FF8616 /* AddProductPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductPresenter.swift; sourceTree = "<group>"; };
 		073155D026FC76F9000C788E /* PhisicalStateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhisicalStateModel.swift; sourceTree = "<group>"; };
 		073155F326FF2C0E000C788E /* StartButtonViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartButtonViewCell.swift; sourceTree = "<group>"; };
 		073155F626FF2C6E000C788E /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
@@ -122,11 +119,12 @@
 		0770156F26F78AE300369B78 /* AgeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeViewCell.swift; sourceTree = "<group>"; };
 		0770157126F87E1C00369B78 /* AdditionalInfoViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInfoViewCell.swift; sourceTree = "<group>"; };
 		0779B50226E4D37C00838FCA /* Health.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Health.xcdatamodel; sourceTree = "<group>"; };
-		0779B50426E4D5EB00838FCA /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
-		0779B50526E4D5EB00838FCA /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0779B50926E4DA9600838FCA /* DataStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStoreManager.swift; sourceTree = "<group>"; };
 		0779B50F26EA290100838FCA /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		078881502A9CF90B001557C3 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
+		078881552A9CFD50001557C3 /* NutritionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionModel.swift; sourceTree = "<group>"; };
+		078881572A9CFE6B001557C3 /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
+		078881592A9D13B2001557C3 /* DataStoreManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStoreManagerProtocol.swift; sourceTree = "<group>"; };
 		07904D992701AEEE00E24264 /* StringEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringEx.swift; sourceTree = "<group>"; };
 		07904D9B2701AF2600E24264 /* ViewEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewEx.swift; sourceTree = "<group>"; };
 		07904D9D2701AF2F00E24264 /* ColorEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorEx.swift; sourceTree = "<group>"; };
@@ -135,10 +133,6 @@
 		07904DB32703309600E24264 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		07904DB42703309600E24264 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/locales.strings; sourceTree = "<group>"; };
 		079DC495271462D200F16087 /* AddProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductViewController.swift; sourceTree = "<group>"; };
-		07AA9D3928AEA5CC00EB43E4 /* DayliNutrion+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DayliNutrion+CoreDataClass.swift"; sourceTree = "<group>"; };
-		07AA9D3A28AEA5CC00EB43E4 /* DayliNutrion+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DayliNutrion+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		07AA9D3D28AEA5F000EB43E4 /* Product+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Product+CoreDataClass.swift"; sourceTree = "<group>"; };
-		07AA9D3E28AEA5F000EB43E4 /* Product+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Product+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		07E7D79926E37C8F00B901AF /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		07F4FF6926E36B690052DD56 /* ProjectOne.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectOne.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07F4FF6C26E36B690052DD56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -272,6 +266,8 @@
 			isa = PBXGroup;
 			children = (
 				07AA9D4328AEA62F00EB43E4 /* CoreData */,
+				078881552A9CFD50001557C3 /* NutritionModel.swift */,
+				078881572A9CFE6B001557C3 /* ProductModel.swift */,
 				073155D026FC76F9000C788E /* PhisicalStateModel.swift */,
 				070C0B072768B19B0009D319 /* WidgetModel.swift */,
 			);
@@ -307,7 +303,9 @@
 		07AA9D4228AEA61D00EB43E4 /* DataStoreManager */ = {
 			isa = PBXGroup;
 			children = (
+				0779B50126E4D37C00838FCA /* Health.xcdatamodeld */,
 				0779B50926E4DA9600838FCA /* DataStoreManager.swift */,
+				078881592A9D13B2001557C3 /* DataStoreManagerProtocol.swift */,
 			);
 			path = DataStoreManager;
 			sourceTree = "<group>";
@@ -315,13 +313,6 @@
 		07AA9D4328AEA62F00EB43E4 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				0779B50126E4D37C00838FCA /* Health.xcdatamodeld */,
-				07AA9D3928AEA5CC00EB43E4 /* DayliNutrion+CoreDataClass.swift */,
-				07AA9D3A28AEA5CC00EB43E4 /* DayliNutrion+CoreDataProperties.swift */,
-				07AA9D3D28AEA5F000EB43E4 /* Product+CoreDataClass.swift */,
-				07AA9D3E28AEA5F000EB43E4 /* Product+CoreDataProperties.swift */,
-				0779B50426E4D5EB00838FCA /* User+CoreDataClass.swift */,
-				0779B50526E4D5EB00838FCA /* User+CoreDataProperties.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -348,7 +339,7 @@
 		07DB6675270F1E54006A7FAA /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				072EDDF2276872DB00FF8616 /* AddProductPresenter.swift.swift */,
+				072EDDF2276872DB00FF8616 /* AddProductPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -797,22 +788,18 @@
 				07F4FF7126E36B690052DD56 /* MainViewController.swift in Sources */,
 				0779B50326E4D37C00838FCA /* Health.xcdatamodeld in Sources */,
 				0748CE9227A00443009685B7 /* UITabbarController.swift in Sources */,
-				072EDDF3276872DB00FF8616 /* AddProductPresenter.swift.swift in Sources */,
+				072EDDF3276872DB00FF8616 /* AddProductPresenter.swift in Sources */,
 				079DC496271462D200F16087 /* AddProductViewController.swift in Sources */,
 				07F4FF6D26E36B690052DD56 /* AppDelegate.swift in Sources */,
-				07AA9D3C28AEA5CC00EB43E4 /* DayliNutrion+CoreDataProperties.swift in Sources */,
 				0779B50A26E4DA9600838FCA /* DataStoreManager.swift in Sources */,
 				0710D8B327689383001B9E6B /* HealthyCardWidget.intentdefinition in Sources */,
 				073155F426FF2C0E000C788E /* StartButtonViewCell.swift in Sources */,
 				078881512A9CF90B001557C3 /* R.generated.swift in Sources */,
 				07F4FFA626E377080052DD56 /* Assembly.swift in Sources */,
-				07AA9D4028AEA5F000EB43E4 /* Product+CoreDataProperties.swift in Sources */,
-				0779B50626E4D5EB00838FCA /* User+CoreDataClass.swift in Sources */,
 				0770157226F87E1C00369B78 /* AdditionalInfoViewCell.swift in Sources */,
 				073155F726FF2C6E000C788E /* BaseButton.swift in Sources */,
 				07904D9C2701AF2600E24264 /* ViewEx.swift in Sources */,
 				073155D126FC76F9000C788E /* PhisicalStateModel.swift in Sources */,
-				07AA9D3F28AEA5F000EB43E4 /* Product+CoreDataClass.swift in Sources */,
 				07E7D79A26E37C8F00B901AF /* Router.swift in Sources */,
 				0770156A26F74ED600369B78 /* ProfileInfoViewController.swift in Sources */,
 				0770154126F34C1800369B78 /* FoodEatViewCell.swift in Sources */,
@@ -820,15 +807,16 @@
 				0770156826F74E0D00369B78 /* ProfileInfoPresenter.swift in Sources */,
 				0770153F26F3267600369B78 /* CalloriesViewCell.swift in Sources */,
 				07904DA02701AFBA00E24264 /* VerticalTextView.swift in Sources */,
-				0779B50726E4D5EB00838FCA /* User+CoreDataProperties.swift in Sources */,
 				07F4FFA326E3728F0052DD56 /* MainPresenter.swift in Sources */,
 				0770156326F733E800369B78 /* UserSettings.swift in Sources */,
-				07AA9D3B28AEA5CC00EB43E4 /* DayliNutrion+CoreDataClass.swift in Sources */,
 				0770157026F78AE300369B78 /* AgeViewCell.swift in Sources */,
 				07904D9A2701AEEE00E24264 /* StringEx.swift in Sources */,
 				0779B51026EA290100838FCA /* CardCell.swift in Sources */,
 				07904D9E2701AF2F00E24264 /* ColorEx.swift in Sources */,
+				078881562A9CFD50001557C3 /* NutritionModel.swift in Sources */,
 				0770156E26F77A4100369B78 /* NameViewCell.swift in Sources */,
+				078881582A9CFE6B001557C3 /* ProductModel.swift in Sources */,
+				0788815A2A9D13B2001557C3 /* DataStoreManagerProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

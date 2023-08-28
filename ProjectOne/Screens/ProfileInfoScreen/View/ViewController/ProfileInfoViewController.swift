@@ -149,14 +149,14 @@ extension ProfileInfoViewController: NameViewCellProtocol, AgeViewCellProtocol, 
         guard let userHeight = userHeight else { return }
         guard let physicalState = physicalState else { return }
 
-        presenter.setUser(
-            name: userName,
-            birthDate: userBirthDate,
-            isMale: isMale ?? true,
-            physicalState: physicalState,
-            weight: Int(userWeight)!,
-            height: Int(userHeight)!
-        )
+//        presenter.setUser(
+//            name: userName,
+//            birthDate: userBirthDate,
+//            isMale: isMale ?? true,
+//            physicalState: physicalState,
+//            weight: Int(userWeight)!,
+//            height: Int(userHeight)!
+//        )
     }
 
     func sendData(birthDate: String) {

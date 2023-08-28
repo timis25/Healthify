@@ -8,20 +8,15 @@
 import Foundation
 import CoreData
 
-protocol DataStoreManagerProtocol {
-    func setUser(name: String, birthDate: String, isMale: Bool, physicalState: Int, weight: Int, height: Int)
-    func getUser() -> [User]?
-    func getProduct() -> [Product]?
-    func addProduct(productName: String, callories: Int, fats: Int, carbs: Int, protein: Int)
-    func getDayliNutrion() -> [DayliNutrion]?
-    func updateDayliNutrion(newCallories: Int, newCarbs: Int, newProtein: Int, newFats: Int)
-}
-
 final class DataStoreManager: DataStoreManagerProtocol {
-    // MARK: - CoreData Stack
+    // MARK: - Constants
+    private enum Constants {
+        static let persistentContainerName: String = "Health"
+    }
 
-    lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Health")
+    // MARK: - Private properties
+    private lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: Constants.persistentContainerName)
         container.loadPersistentStores(completionHandler: { (_, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
@@ -30,9 +25,10 @@ final class DataStoreManager: DataStoreManagerProtocol {
         return container
     }()
 
-    lazy var viewContext: NSManagedObjectContext = persistentContainer.viewContext
+    private lazy var viewContext: NSManagedObjectContext = persistentContainer.viewContext
 
-    func saveContext() {
+    // MARK: - Private methods
+    private func saveContext() {
         let context = persistentContainer.viewContext
         if context.hasChanges {
             do {
@@ -43,31 +39,30 @@ final class DataStoreManager: DataStoreManagerProtocol {
             }
         }
     }
-
     // MARK: - Public methods
-    func updateDayliNutrion(newCallories: Int, newCarbs: Int, newProtein: Int, newFats: Int) {
+    func updateDayliNutrition(_ model: NutritionModel) {
         if let data = getDayliNutrion()?.last {
-            data.callories += Int32(newCallories)
-            data.carbs += Int16(newCarbs)
-            data.protein += Int16(newProtein)
-            data.fats += Int16(newFats)
+            data.callories += Int32(model.callories)
+            data.carbs += Int16(model.carbs)
+            data.protein += Int16(model.proteins)
+            data.fats += Int16(model.fats)
         } else {
-            let product = DayliNutrion(context: viewContext)
-            product.callories = Int32(newCallories)
-            product.carbs = Int16(newCarbs)
-            product.protein = Int16(newProtein)
-            product.fats = Int16(newFats)
+            let product = DayliNutrionCoreData(context: viewContext)
+            product.callories = Int32(model.callories)
+            product.carbs = Int16(model.carbs)
+            product.protein = Int16(model.proteins)
+            product.fats = Int16(model.fats)
         }
 
         saveContext()
     }
 
-    func getDayliNutrion() -> [DayliNutrion]? {
-        var nutrion: [DayliNutrion]?
+    func getDayliNutrion() -> [DayliNutrionCoreData]? {
+        var nutrion: [DayliNutrionCoreData]?
 
         do {
             if !UserSettings.isThisDay() {
-                if let result = try? viewContext.fetch(DayliNutrion.fetchRequest()) {
+                if let result = try? viewContext.fetch(DayliNutrionCoreData.fetchRequest()) {
                     for object in result {
                         viewContext.delete(object)
                     }
@@ -75,60 +70,57 @@ final class DataStoreManager: DataStoreManagerProtocol {
                     UserSettings.setNowDay(Date())
                 }
             }
-            try nutrion = viewContext.fetch(DayliNutrion.fetchRequest())
-            return nutrion
+            try nutrion = viewContext.fetch(DayliNutrionCoreData.fetchRequest())
         } catch let error as NSError {
-            print("Could not fetch request \(error), \(error.userInfo)")
-            return nutrion
+            fatalError("Could not fetch request \(error), \(error.userInfo)")
         }
+
+        return nutrion
     }
 
-    func addProduct(productName: String, callories: Int, fats: Int, carbs: Int, protein: Int) {
-        let product = Product(context: viewContext)
-        product.callorie = Int32(callories)
-        product.protein = Int16(protein)
-        product.carbs = Int16(carbs)
-        product.fats = Int16(fats)
-        product.name = productName
+    func addProduct(_ model: ProductModel) {
+        let product = ProductCoreData(context: viewContext)
+        product.callorie = Int32(model.nutrition.callories)
+        product.protein = Int16(model.nutrition.proteins)
+        product.carbs = Int16(model.nutrition.carbs)
+        product.fats = Int16(model.nutrition.fats)
+        product.name = model.productName
         product.date = Date()
 
         saveContext()
     }
 
-    func getProduct() -> [Product]? {
-        var products: [Product]?
+    func getProduct() -> [ProductCoreData]? {
+        var products: [ProductCoreData]?
 
         do {
-            try products = viewContext.fetch(Product.fetchRequest())
-            print(products)
-            return products
+            try products = viewContext.fetch(ProductCoreData.fetchRequest())
         } catch let error as NSError {
-            print("Could not fetch request \(error), \(error.userInfo)")
-            return products
+            fatalError("Could not fetch request \(error), \(error.userInfo)")
         }
+        return products
     }
 
-    func getUser() -> [User]? {
-        var user: [User]?
+    func getUser() -> [UserCoreData]? {
+        var user: [UserCoreData]?
 
         do {
-            user = try viewContext.fetch(User.fetchRequest())
-            print(user)
-            return user
+            try user = viewContext.fetch(UserCoreData.fetchRequest())
         } catch let error as NSError {
-            print("Could not fetch request \(error), \(error.userInfo)")
-            return user
+            fatalError("Could not fetch request \(error), \(error.userInfo)")
         }
+
+        return user
     }
 
-    func setUser(name: String, birthDate: String, isMale: Bool, physicalState: Int, weight: Int, height: Int) {
-        let user = User(context: viewContext)
-        user.name = name
-        user.physicalState = Int16(physicalState)
-        user.birthday = birthDate
-        user.isMale = isMale
-        user.height = Int16(height)
-        user.weight = Int16(weight)
+    func setUser(_ user: UserCoreData) {
+        let user = UserCoreData(context: viewContext)
+        user.name = user.name
+        user.physicalState = user.physicalState
+        user.birthday = user.birthday
+        user.gender = user.gender
+        user.height = user.height
+        user.weight = user.weight
 
         saveContext()
     }

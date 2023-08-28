@@ -23,7 +23,7 @@ final class MainViewController: UIViewController {
     // MARK: - Data Variable
     var nutrionData: [String: String]?
     var nowNutrionData: [String: String]?
-    var productsData: [Product]?
+    var productsData: [ProductCoreData]?
 
     // MARK: - Dependences
     var presenter: MainPresenterProtocol!
