@@ -7,28 +7,35 @@
 
 import UIKit
 
-class ProfileInfoViewController: UIViewController {
+protocol ProfileInfoViewProtocol: AnyObject {
+}
+
+final class ProfileInfoViewController: UIViewController {
+    // MARK: - UI Elements
     private let tableView = UITableView()
 
-    var userName: String?
-    var userWeight: String?
-    var userHeight: String?
-    var userBirthDate: String?
-    var isMale: Bool?
-    var physicalState: Int?
+    // MARK: - Private properties
+    private var userName: String?
+    private var userWeight: String?
+    private var userHeight: String?
+    private var userBirthDate: String?
+    private var isMale: Bool?
+    private var physicalState: Int?
+    private var isShowAfterOnbording: Bool?
+    private var presenter: ProfileInfoPresenterProtocol
 
-    var presenter: ProfileInfoPresenterProtocol!
-    var isShowAfterOnbording: Bool?
-
-    init(isShowAfterOnbording: Bool) {
-        super.init(nibName: nil, bundle: nil)
+    // MARK: - Init
+    init(presenter: ProfileInfoPresenterProtocol, isShowAfterOnbording: Bool) {
+        self.presenter = presenter
         self.isShowAfterOnbording = isShowAfterOnbording
+        super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -37,6 +44,7 @@ class ProfileInfoViewController: UIViewController {
         configureStandartNavBar()
     }
 
+    // MARK: - Private methods
     private func configureTableView() {
         view.addSubview(tableView)
 
@@ -63,9 +71,11 @@ class ProfileInfoViewController: UIViewController {
     }
 }
 
+// MARK: - ProfileInfoViewProtocol
 extension ProfileInfoViewController: ProfileInfoViewProtocol {
 }
 
+// MARK: - UITableViewDelegate, UITableViewDataSource
 extension ProfileInfoViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 6
@@ -141,6 +151,7 @@ extension ProfileInfoViewController: UITableViewDelegate, UITableViewDataSource 
     }
 }
 
+// MARK: - NameViewCellProtocol, AgeViewCellProtocol, StartButtonViewCellProtocol
 extension ProfileInfoViewController: NameViewCellProtocol, AgeViewCellProtocol, StartButtonViewCellProtocol {
     func startButtonDidTouch() {
         guard let userName = userName else { return }
@@ -149,14 +160,16 @@ extension ProfileInfoViewController: NameViewCellProtocol, AgeViewCellProtocol, 
         guard let userHeight = userHeight else { return }
         guard let physicalState = physicalState else { return }
 
-//        presenter.setUser(
-//            name: userName,
-//            birthDate: userBirthDate,
-//            isMale: isMale ?? true,
-//            physicalState: physicalState,
-//            weight: Int(userWeight)!,
-//            height: Int(userHeight)!
-//        )
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        let model = UserModel(
+            name: userName,
+            birthday: dateFormatter.date(from: userBirthDate) ?? Date(),
+            physicalState: PhysicalState(rawValue: physicalState) ?? .smallActivity,
+            weight: Int(userWeight) ?? 0,
+            height: Int(userHeight) ?? 0
+        )
+        presenter.setUser(model)
     }
 
     func sendData(birthDate: String) {
@@ -179,6 +192,7 @@ extension ProfileInfoViewController: NameViewCellProtocol, AgeViewCellProtocol, 
     }
 }
 
+// MARK: - AdditionalInfoViewCelDelegate
 extension ProfileInfoViewController: AdditionalInfoViewCelDelegate {
     func sendPhysicalState(data: PhysicalStateModel) {
         physicalState = data.id
@@ -194,6 +208,7 @@ extension ProfileInfoViewController: AdditionalInfoViewCelDelegate {
     }
 }
 
+// MARK: - TextType
 enum TextType {
     case name
     case weight

@@ -11,16 +11,22 @@ protocol NameViewCellProtocol: AnyObject {
     func sendData(text: String, cellType: TextType)
 }
 
-class NameViewCell: UITableViewCell {
+final class NameViewCell: UITableViewCell {
+    // MARK: - UI Elements
     private let view = UIView()
     private let nameTextField = UITextField()
     private let mainLabel = UILabel()
     private let separator = UIView()
     private let toolBar = UIToolbar()
-    private var cellType: TextType?
-    weak var delegate: NameViewCellProtocol?
-    var unitString = ""
 
+    // MARK: - Private properties
+    private var cellType: TextType?
+    private var unitString = ""
+
+    // MARK: - Public methods
+    weak var delegate: NameViewCellProtocol?
+
+    // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureView()
@@ -31,7 +37,11 @@ class NameViewCell: UITableViewCell {
         separator.isHidden = true
     }
 
-    public func setType(type: TextType) {
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    // MARK: - Public methods
+    func setType(type: TextType) {
         cellType = type
         switch type {
         case .name:
@@ -60,6 +70,7 @@ class NameViewCell: UITableViewCell {
         }
     }
 
+    // MARK: - Private methods
     private func configureMainLabel() {
         view.addSubview(mainLabel)
 
@@ -127,19 +138,17 @@ class NameViewCell: UITableViewCell {
         }
     }
 
-    @objc func doneBarButtonAction() {
+    // MARK: - Actions
+    @objc private func doneBarButtonAction() {
         view.endEditing(true)
     }
 
-    @objc func textFieldDidChange() {
+    @objc private func textFieldDidChange() {
         delegate?.sendData(text: nameTextField.text ?? "", cellType: cellType!)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
 
+// MARK: - UITextFieldDelegate
 extension NameViewCell: UITextFieldDelegate {
     func textField(
         _ textField: UITextField,
@@ -150,19 +159,20 @@ extension NameViewCell: UITextFieldDelegate {
             let newLength = textField.text!.count + string.count - range.length
 
             if string == "" {
-                // handle backspace scenario here
                 return true
-            } else if var textString = textField.text {
-                if textString.contains(unitString) && newLength <= 5 {
+            }
+
+            if var textString = textField.text {
+                let maxLength = 5
+                if textString.contains(unitString), newLength <= maxLength {
                     textString = textString.replacingOccurrences(of: unitString, with: "")
                     textString += string + unitString
                     textField.text = textString
-                } else if newLength <= 5 {
+                } else if newLength <= maxLength {
                     textField.text = string + unitString
                 }
                 return false
             }
-
             return false
         }
         return true

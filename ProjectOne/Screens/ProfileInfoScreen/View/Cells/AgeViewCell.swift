@@ -11,7 +11,8 @@ protocol AgeViewCellProtocol: AnyObject {
     func sendData(birthDate: String)
 }
 
-class AgeViewCell: UITableViewCell {
+final class AgeViewCell: UITableViewCell {
+    // MARK: - UI Elements
     private let ageTextField = UITextField()
     private let view = UIView()
     private let separator = UIView()
@@ -19,8 +20,10 @@ class AgeViewCell: UITableViewCell {
     private let datePicker = UIDatePicker()
     private let toolBar = UIToolbar()
 
+    // MARK: - Public properties
     weak var delegate: AgeViewCellProtocol?
 
+    // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureView()
@@ -36,6 +39,7 @@ class AgeViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Private methods
     private func configureToolBar() {
         let doneBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .done,
@@ -123,7 +127,8 @@ class AgeViewCell: UITableViewCell {
         }
     }
 
-    @objc func doneBarAction() {
+    // MARK: - Actions
+    @objc private func doneBarAction() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.yyyy"
         let stringDate = dateFormatter.string(from: datePicker.date)
@@ -132,7 +137,7 @@ class AgeViewCell: UITableViewCell {
         view.endEditing(true)
     }
 
-    @objc func doneBarButtonAction() {
+    @objc private func doneBarButtonAction() {
         view.endEditing(true)
     }
 }

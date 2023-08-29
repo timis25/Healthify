@@ -6,54 +6,61 @@
 //
 
 import Foundation
+import WidgetKit
 
 protocol MainViewProtocol: AnyObject {
 }
 
-protocol MainPresenterProtocol: AnyObject {
-    init(view: MainViewProtocol, router: RouterProtocol, dataStorageManager: DataStoreManagerProtocol)
-    func getUserNutrionInfo() -> [String: String]?
-    func goToProfileSettings()
-    func getProducts() -> [ProductCoreData]?
-    func goToAddProduct()
-    func getDayliNutrion() -> [String: String]?
-}
-
-class MainPresenter: MainPresenterProtocol {
+final class MainPresenter: MainPresenterProtocol {
+    // MARK: - Public properties
     weak var view: MainViewProtocol?
-    var router: RouterProtocol
-    let dataManager: DataStoreManagerProtocol!
 
-    required init(view: MainViewProtocol, router: RouterProtocol, dataStorageManager: DataStoreManagerProtocol) {
-        self.view = view
+    // MARK: - Private properties
+    private let router: RouterProtocol
+    private let dataManager: DataStoreManagerProtocol
+
+    // MARK: - Init
+    init(router: RouterProtocol, dataStorageManager: DataStoreManagerProtocol) {
         self.router = router
         self.dataManager = dataStorageManager
     }
 
-    func getProducts() -> [ProductCoreData]? {
-        let products = dataManager.getProduct()
-        return products
+    // MARK: - Public methods
+    func getModel() -> MainViewModel {
+        let dailyNutrition = getDayliNutrion()
+        let currentNutrition = getUserNutrionInfo()
+
+        let widgetData = WidgetModel(currentNutrition: currentNutrition, dailyNutrition: dailyNutrition)
+        UserSettings.addDataToWidget(widgetData)
+        if #available(iOS 14.0, *) {
+            WidgetCenter.shared.reloadAllTimelines()
+        }
+        return MainViewModel(
+            currentNutrition: currentNutrition,
+            dailyNutrition: dailyNutrition,
+            todayProducts: getProducts(),
+            user: getUser()
+        )
     }
 
-    func getUserNutrionInfo() -> [String: String]? {
-        let userInfo = dataManager.getUser()?.last
-        guard let userName = userInfo?.name else { return nil }
-        guard let birthday = userInfo?.birthday else { return nil }
-        guard let physicalState = userInfo?.physicalState else { return nil }
-        guard let isMale = userInfo?.gender else { return nil }
-        guard let height = userInfo?.height else { return nil }
-        guard let weight = userInfo?.weight else { return nil }
+    func goToProfileSettings() {
+        router.showInfoProfileSetting(isShowAfterOnbording: false)
+    }
 
-        let calloriesFormula = calculateCalories(
-            isMale: (isMale != 0),
-            weight: Int(weight),
-            height: Int(height),
-            birthday: birthday
-        )
+    func goToAddProduct() {
+        router.initAddProductScreen()
+    }
+
+    // MARK: - Private methods
+    private func getUserNutrionInfo() -> NutritionModel {
+        var model = NutritionModel()
+        let user = getUser()
+
+        let totalCalories = calculateCalories(user)
 
         let calloriesFormulaWithTrain = calloriesFormulaWightTrain(
-            baseCalories: calloriesFormula,
-            physicalState: Int(physicalState)
+            baseCalories: totalCalories,
+            physicalState: user.physicalState
         )
 
         let proteinFormula = calloriesFormulaWithTrain * 0.3 / 4
@@ -65,82 +72,67 @@ class MainPresenter: MainPresenterProtocol {
         let protein = Int(round(proteinFormula))
         let fats = Int(round(fatsFormula))
 
-        let nutrionInfo = [
-            "callories": String(callories),
-            "fats": String(fats),
-            "carbs": String(carbs),
-            "protein": String(protein),
-            "userName": userName
-        ]
-        return nutrionInfo
+        model.callories = callories
+        model.fats = fats
+        model.proteins = protein
+        model.carbs = carbs
+
+        return model
     }
 
-    func getDayliNutrion() -> [String: String]? {
-        let dayliNutrion = dataManager.getDayliNutrion()?.last
-        let callories = Int(dayliNutrion?.callories ?? 0)
-        let carbs = Int(dayliNutrion?.carbs ?? 0)
-        let protein = Int(dayliNutrion?.protein ?? 0)
-        let fats = Int(dayliNutrion?.fats ?? 0)
-
-        let dayliNutrionData = [
-            "callories": String(callories),
-            "carbs": String(carbs),
-            "protein": String(protein),
-            "fats": String(fats)
-        ]
-        return dayliNutrionData
+    private func getUser() -> UserModel {
+        guard let userInfo = dataManager.getUser()?.last else { return UserModel() }
+        return UserModel(userInfo)
     }
 
-    func goToProfileSettings() {
-        router.showInfoProfileSetting(isShowAfterOnbording: false)
+    private func getDayliNutrion() -> NutritionModel {
+        guard let dayliNutrion = dataManager.getDayliNutrion()?.last else { return NutritionModel() }
+        return NutritionModel(dayliNutrion)
     }
 
-    func goToAddProduct() {
-        router.initAddProductScreen()
-    }
-}
+    private func getProducts() -> [ProductModel] {
+        guard let products = dataManager.getProduct() else { return [] }
+        return products.map({
+            guard let name = $0.name,
+                  let nutritionModel = $0.nutritionCoreData
+            else { return ProductModel() }
 
-extension MainPresenter {
-    private func calloriesFormulaWightTrain(baseCalories: Double, physicalState: Int ) -> Double {
+            return ProductModel(productName: name, nutrition: NutritionModel(nutritionModel)) })
+    }
+
+    private func calloriesFormulaWightTrain(baseCalories: Double, physicalState: PhysicalState) -> Double {
         switch physicalState {
-        case 1:
+        case .noneActivity:
             return baseCalories * 1.2
-
-        case 2:
+        case .smallActivity:
             return baseCalories * 1.375
-
-        case 3:
+        case .mediumActivity:
             return baseCalories * 1.55
-
-        case 4:
+        case .fullWeekActivity:
             return baseCalories * 1.725
-
-        case 5:
+        case .hardTraining:
             return baseCalories * 1.9
-
-        default:
-            return 0
         }
     }
 
-    private func calculateCalories(isMale: Bool, weight: Int, height: Int, birthday: String) -> Double {
-        let age = calcAge(birthday: birthday)
-        let weightCalories = 10 * weight
-        let heightCalories = Double(height) * 6.25
+    private func calculateCalories(_ user: UserModel) -> Double {
+        let age = calcAge(birthday: user.birthday)
+        let weightCalories = 10 * user.weight
+        let heightCalories = Double(user.height) * 6.25
         let ageCalories = 5 * age
 
-        let genderModifier = isMale ? 5 : -161
+        let genderModifier = user.gender == .male ? 5 : -161
 
         return Double(weightCalories) + heightCalories - Double(ageCalories) + Double(genderModifier)
     }
 
-    private func calcAge(birthday: String) -> Int {
+    private func calcAge(birthday: Date) -> Int {
         let dateFormater = DateFormatter()
         dateFormater.dateFormat = "dd.MM.yyyy"
-        let birthdayDate = dateFormater.date(from: birthday)
+        print(dateFormater.string(from: birthday))
         let calendar: NSCalendar! = NSCalendar(calendarIdentifier: .gregorian)
         let now = Date()
-        let calcAge = calendar.components(.year, from: birthdayDate!, to: now, options: [])
+        let calcAge = calendar.components(.year, from: birthday, to: now, options: [])
         let age = calcAge.year
         return age!
     }

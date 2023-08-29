@@ -7,9 +7,23 @@
 
 import Foundation
 
-struct NutritionModel {
-    var fats: Int = 0
-    var carbs: Int = 0
-    var proteins: Int = 0
-    var callories: Int = 0
+struct NutritionModel: Codable {
+    var fats: Int
+    var carbs: Int
+    var proteins: Int
+    var callories: Int
+
+    init(fats: Int = 0, carbs: Int = 0, proteins: Int = 0, callories: Int = 0) {
+        self.fats = fats
+        self.carbs = carbs
+        self.proteins = proteins
+        self.callories = callories
+    }
+
+    init(_ model: NutritionCoreData) {
+        self.fats = Int(model.fats)
+        self.carbs = Int(model.carbs)
+        self.callories = Int(model.callories)
+        self.proteins = Int(model.protein)
+    }
 }

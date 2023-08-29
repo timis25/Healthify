@@ -47,7 +47,7 @@ final class DataStoreManager: DataStoreManagerProtocol {
             data.protein += Int16(model.proteins)
             data.fats += Int16(model.fats)
         } else {
-            let product = DayliNutrionCoreData(context: viewContext)
+            let product = NutritionCoreData(context: viewContext)
             product.callories = Int32(model.callories)
             product.carbs = Int16(model.carbs)
             product.protein = Int16(model.proteins)
@@ -57,12 +57,12 @@ final class DataStoreManager: DataStoreManagerProtocol {
         saveContext()
     }
 
-    func getDayliNutrion() -> [DayliNutrionCoreData]? {
-        var nutrion: [DayliNutrionCoreData]?
+    func getDayliNutrion() -> [NutritionCoreData]? {
+        var nutrion: [NutritionCoreData]?
 
         do {
             if !UserSettings.isThisDay() {
-                if let result = try? viewContext.fetch(DayliNutrionCoreData.fetchRequest()) {
+                if let result = try? viewContext.fetch(NutritionCoreData.fetchRequest()) {
                     for object in result {
                         viewContext.delete(object)
                     }
@@ -70,7 +70,7 @@ final class DataStoreManager: DataStoreManagerProtocol {
                     UserSettings.setNowDay(Date())
                 }
             }
-            try nutrion = viewContext.fetch(DayliNutrionCoreData.fetchRequest())
+            try nutrion = viewContext.fetch(NutritionCoreData.fetchRequest())
         } catch let error as NSError {
             fatalError("Could not fetch request \(error), \(error.userInfo)")
         }
@@ -80,12 +80,15 @@ final class DataStoreManager: DataStoreManagerProtocol {
 
     func addProduct(_ model: ProductModel) {
         let product = ProductCoreData(context: viewContext)
-        product.callorie = Int32(model.nutrition.callories)
-        product.protein = Int16(model.nutrition.proteins)
-        product.carbs = Int16(model.nutrition.carbs)
-        product.fats = Int16(model.nutrition.fats)
+        let nutritionCoreData = NutritionCoreData(context: viewContext)
+        nutritionCoreData.callories = Int32(model.nutrition.callories)
+        nutritionCoreData.protein = Int16(model.nutrition.proteins)
+        nutritionCoreData.carbs = Int16(model.nutrition.carbs)
+        nutritionCoreData.fats = Int16(model.nutrition.fats)
+
         product.name = model.productName
         product.date = Date()
+        product.nutritionCoreData = nutritionCoreData
 
         saveContext()
     }
@@ -113,14 +116,14 @@ final class DataStoreManager: DataStoreManagerProtocol {
         return user
     }
 
-    func setUser(_ user: UserCoreData) {
+    func setUser(_ model: UserModel) {
         let user = UserCoreData(context: viewContext)
-        user.name = user.name
-        user.physicalState = user.physicalState
-        user.birthday = user.birthday
-        user.gender = user.gender
-        user.height = user.height
-        user.weight = user.weight
+        user.name = model.name
+        user.physicalState = Int16(model.physicalState.rawValue)
+        user.birthday = model.birthday
+        user.gender = Int16(model.gender.rawValue)
+        user.height = Int16(model.height)
+        user.weight = Int16(model.weight)
 
         saveContext()
     }

@@ -10,7 +10,7 @@ import SnapKit
 import WidgetKit
 
 final class MainViewController: UIViewController {
-    // MARK: - UIElemets
+    // MARK: - UI Elemets
     private let tableView = UITableView()
     private let welcomeLabel = UILabel()
     private lazy var refreshControll: UIRefreshControl = {
@@ -20,68 +20,36 @@ final class MainViewController: UIViewController {
     }()
     let gradientLayer = CAGradientLayer()
 
-    // MARK: - Data Variable
-    var nutrionData: [String: String]?
-    var nowNutrionData: [String: String]?
-    var productsData: [ProductCoreData]?
+    // MARK: - Private propeties
+    private var model: MainViewModel = MainViewModel(user: UserModel())
 
-    // MARK: - Dependences
-    var presenter: MainPresenterProtocol!
+    // MARK: - Private properties
+    var presenter: MainPresenterProtocol
 
+    // MARK: - Init
+    init(presenter: MainPresenterProtocol) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
         viewDidLoadSetup()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        viewDidAppearSetup()
-    }
-    // MARK: - Private
+    // MARK: - Private methods
     private func viewDidLoadSetup() {
         view.backgroundColor = .white
+        model = presenter.getModel()
         configureNavgationView()
         configureWelcomeLabel()
         configureTableView()
         configureStandartNavBar()
-    }
-
-    private func viewDidAppearSetup() {
-        nutrionData = presenter.getUserNutrionInfo()
-        if let userName = nutrionData?["userName"] {
-            title = userName
-        }
-        productsData = presenter.getProducts()?.reversed()
-        nowNutrionData = presenter.getDayliNutrion()
-        let userDefaults = UserDefaults(suiteName: "group.timis.Healthtify.Widget")
-        let dayliFats = nutrionData?["fats"] ?? "0"
-        let dayliCarbs = nutrionData?["carbs"] ?? "0"
-        let dayliProtein = nutrionData?["protein"] ?? "0"
-        let nowFats = nowNutrionData?["fats"] ?? "0"
-        let nowCarbs = nowNutrionData?["carbs"] ?? "0"
-        let nowProtein = nowNutrionData?["protein"] ?? "0"
-        let dayliCallories = nutrionData?["callories"] ?? "0"
-        let nowCallories = nowNutrionData?["callories"] ?? "0"
-
-        let widgetData = WidgetModel(
-            dayliFats: dayliFats,
-            nowFats: nowFats,
-            dayliCarbs: dayliCarbs,
-            nowCarbs: nowCarbs,
-            dayliProtein: dayliProtein,
-            nowProtein: nowProtein,
-            nowCallories: nowCallories,
-            dayliCallories: dayliCallories
-        )
-
-        guard let data = try? JSONEncoder().encode(widgetData) else { return }
-
-        userDefaults?.set(data, forKey: "dailyInfo")
-
-        if #available(iOS 14.0, *) {
-            WidgetCenter.shared.reloadAllTimelines()
-        }
-        tabBarController?.tabBar.selectedItem?.title = R.string.locales.mainMain()
         tableView.reloadData()
     }
 
@@ -129,12 +97,7 @@ private extension MainViewController {
     }
 
     @objc func refreshAction() {
-        nutrionData = presenter.getUserNutrionInfo()
-        if let userName = nutrionData?["userName"] {
-            title = userName
-        }
-        productsData = presenter.getProducts()?.reversed()
-        nowNutrionData = presenter.getDayliNutrion()
+        model = presenter.getModel()
         tableView.reloadData()
         refreshControll.endRefreshing()
     }
@@ -150,7 +113,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         }
 
         if section == 1 {
-            return productsData?.count ?? 0
+            return model.todayProducts.count
         }
 
         return 0
@@ -200,21 +163,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
             withIdentifier: String(describing: CardCell.self),
             for: indexPath
         ) as? CardCell {
-            let dayliFats = nutrionData?["fats"]
-            let dayliCarbs = nutrionData?["carbs"]
-            let dayliProtein = nutrionData?["protein"]
-            let nowFats = nowNutrionData?["fats"] ?? "0"
-            let nowCarbs = nowNutrionData?["carbs"] ?? "0"
-            let nowProtein = nowNutrionData?["protein"] ?? "0"
-
-            cell.setData(
-                dayliFats: dayliFats ?? "",
-                nowFats: nowFats,
-                dayliCarbs: dayliCarbs ?? "",
-                nowCarbs: nowCarbs,
-                dayliProtein: dayliProtein ?? "",
-                nowProtein: nowProtein
-            )
+            cell.setData(model)
             return cell
         }
         return UITableViewCell()
@@ -225,9 +174,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
             withIdentifier: String(describing: CalloriesViewCell.self),
             for: indexPath
         ) as? CalloriesViewCell {
-            let dayliCallories = nutrionData?["callories"] ?? "0"
-            let nowCallories = nowNutrionData?["callories"] ?? "0"
-            cell.setData(rateCallories: "", dayliCallories: dayliCallories, nowCallories: nowCallories)
+            cell.setData(model)
             return cell
         }
 
@@ -239,14 +186,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
             withIdentifier: String(describing: FoodEatViewCell.self),
             for: indexPath
         ) as? FoodEatViewCell {
-            let callories = productsData?[indexPath.row].callorie ?? 0
-            let date = productsData?[indexPath.row].date ?? Date()
-            let productName = productsData?[indexPath.row].name ?? ""
-
-            let dateFormater = DateFormatter()
-            dateFormater.dateFormat = "dd.MMMM.yy  HH:mm"
-            let stringDate = dateFormater.string(from: date)
-            cell.setData(callories: Int(callories), productName: productName, date: stringDate)
+            cell.setData(model.todayProducts[indexPath.row])
             return cell
         }
 

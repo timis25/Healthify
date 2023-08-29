@@ -14,7 +14,8 @@ protocol AdditionalInfoViewCelDelegate: AnyObject {
     func sendPhysicalState(data: PhysicalStateModel)
 }
 
-class AdditionalInfoViewCell: UITableViewCell {
+final class AdditionalInfoViewCell: UITableViewCell {
+    // MARK: - UI Elements
     private let view = UIView()
     private let mainLabel = UILabel()
     private let physicalStateTextField = VerticalTextView()
@@ -22,9 +23,12 @@ class AdditionalInfoViewCell: UITableViewCell {
     private let physcPicker = UIPickerView()
     private var pickerData = [PhysicalStateModel]()
     private let toolBar = UIToolbar()
-    var selectedType: PhysicalStateModel?
+    private var selectedType: PhysicalStateModel?
+
+    // MARK: - Public properties
     weak var delegate: AdditionalInfoViewCelDelegate?
 
+    // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setPickerData()
@@ -36,6 +40,10 @@ class AdditionalInfoViewCell: UITableViewCell {
         configureToolBar()
     }
 
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    // MARK: - Private methods
     private func configureToolBar() {
         let doneBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .done,
@@ -63,11 +71,11 @@ class AdditionalInfoViewCell: UITableViewCell {
     }
 
     private func setPickerData() {
-        pickerData.append(PhysicalStateModel(id: 1, description: R.string.locales.physxState1()))
-        pickerData.append(PhysicalStateModel(id: 2, description: R.string.locales.physxState2()))
-        pickerData.append(PhysicalStateModel(id: 3, description: R.string.locales.physxState3()))
-        pickerData.append(PhysicalStateModel(id: 4, description: R.string.locales.physxState4()))
-        pickerData.append(PhysicalStateModel(id: 5, description: R.string.locales.physxState5()))
+        pickerData.append(PhysicalStateModel(id: 0, description: R.string.locales.physxState1()))
+        pickerData.append(PhysicalStateModel(id: 1, description: R.string.locales.physxState2()))
+        pickerData.append(PhysicalStateModel(id: 2, description: R.string.locales.physxState3()))
+        pickerData.append(PhysicalStateModel(id: 3, description: R.string.locales.physxState4()))
+        pickerData.append(PhysicalStateModel(id: 4, description: R.string.locales.physxState5()))
     }
 
     private func configurePhyscPicker() {
@@ -123,7 +131,8 @@ class AdditionalInfoViewCell: UITableViewCell {
         }
     }
 
-    @objc func doneBarButtonAction() {
+    // MARK: - Actions
+    @objc private func doneBarButtonAction() {
         if let selectedType = selectedType {
             delegate?.sendPhysicalState(data: selectedType)
             view.endEditing(true)
@@ -135,19 +144,16 @@ class AdditionalInfoViewCell: UITableViewCell {
         }
     }
 
-    @objc func selectorSexAction() {
+    @objc private func selectorSexAction() {
         if selectorSex.selectedSegmentIndex == 0 {
             delegate?.sendSex(isMale: true)
         } else {
             delegate?.sendSex(isMale: false)
         }
     }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }
 
+// MARK: - UIPickerViewDataSource, UIPickerViewDelegate
 extension AdditionalInfoViewCell: UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -170,6 +176,7 @@ extension AdditionalInfoViewCell: UIPickerViewDataSource, UIPickerViewDelegate {
     }
 }
 
+// MARK: - UITextViewDelegate
 extension AdditionalInfoViewCell: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == .lightGray {

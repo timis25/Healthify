@@ -14,23 +14,23 @@ final class Assembly: AssemblyProtocol {
         dataStorage: DataStoreManagerProtocol,
         isShowAfterOnbording: Bool
     ) -> UIViewController {
-        let view = ProfileInfoViewController(isShowAfterOnbording: isShowAfterOnbording)
-        let presenter = ProfileInfoPresenter(view: view, router: router, dataStorageManager: dataStorage)
-        view.presenter = presenter
+        let presenter = ProfileInfoPresenter(router: router, dataStorageManager: dataStorage)
+        let view = ProfileInfoViewController(presenter: presenter, isShowAfterOnbording: isShowAfterOnbording)
+        presenter.view = view
         return view
     }
 
     func createMain(router: RouterProtocol, dataStorage: DataStoreManagerProtocol) -> UIViewController {
-        let view = MainViewController()
-        let presenter = MainPresenter(view: view, router: router, dataStorageManager: dataStorage)
-        view.presenter = presenter
+        let presenter = MainPresenter(router: router, dataStorageManager: dataStorage)
+        let view = MainViewController(presenter: presenter)
+        presenter.view = view
         return view
     }
 
     func createAddProduct(router: RouterProtocol, dataStorage: DataStoreManagerProtocol) -> UIViewController {
-        let view = AddProductViewController()
-        let presenter = AddProductPresenter(view: view, router: router, dataStorageManager: dataStorage)
-        view.presenter = presenter
+        let presenter = AddProductPresenter(router: router, dataStorageManager: dataStorage)
+        let view = AddProductViewController(presenter: presenter)
+        presenter.view = view
         return view
     }
 }

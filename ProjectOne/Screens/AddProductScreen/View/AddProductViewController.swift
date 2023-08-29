@@ -11,7 +11,7 @@ protocol AddProductViewProtocol: AnyObject {
 }
 
 final class AddProductViewController: UIViewController {
-    // MARK: - UIElemets
+    // MARK: - UI Elemets
     private let mainView = UIView()
     private let mainLabel = UILabel()
     private let fatsTextField = UITextField()
@@ -21,9 +21,20 @@ final class AddProductViewController: UIViewController {
     private let productNameTextField = UITextField()
     private let addButton = BaseButton()
 
-    // MARK: - Dependences
-    var presenter: AddProductPresenterProtocol!
+    // MARK: - Private properties
+    var presenter: AddProductPresenterProtocol
 
+    // MARK: - Init
+    init(presenter: AddProductPresenterProtocol) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - Override methids
     override func viewDidLoad() {
         super.viewDidLoad()
         viewDidLoadSetup()
@@ -33,8 +44,7 @@ final class AddProductViewController: UIViewController {
         super.viewDidAppear(animated)
         viewDidAppearSetup()
     }
-    // MARK: - Private
-
+    // MARK: - Private methods
     private func viewDidLoadSetup() {
         view.backgroundColor = .white
         configureStandartNavBar()
@@ -215,7 +225,6 @@ private extension AddProductViewController {
         productModel.nutrition = NutritionModel(fats: fats, carbs: carbs, proteins: proteins, callories: callories)
 
         presenter.addProduct(productModel)
-        navigationController?.popViewController(animated: true)
     }
 
     @objc func dismissKeyboardAction() {
@@ -233,43 +242,31 @@ extension AddProductViewController: UITextFieldDelegate {
         replacementString string: String
     ) -> Bool {
         var unitString: String {
-            if textField.placeholder == R.string.locales.addProductDishCallories() {
-                return R.string.locales.unitCallories()
-            } else {
-                return R.string.locales.unitWeightGr()
-            }
+            return textField.placeholder == R.string.locales.addProductDishCallories() ?
+                   R.string.locales.unitCallories() :
+                   R.string.locales.unitWeightGr()
         }
+
         let newLength = textField.text!.count + string.count - range.length
 
-        if textField.placeholder == R.string.locales.addProductDishCallories() {
-            if string == "" {
-                // handle backspace scenario here
-                return true
-            } else if var textString = textField.text {
-                if textString.contains(unitString) && newLength <= 9 {
-                    textString = textString.replacingOccurrences(of: unitString, with: "")
-                    textString += string + unitString
-                    textField.text = textString
-                } else if newLength <= 9 {
-                    textField.text = string + unitString
-                }
-                return false
-            }
-        } else {
-            if string == "" {
-                // handle backspace scenario here
-                return true
-            } else if var textString = textField.text {
-                if textString.contains(unitString) && newLength <= 5 {
-                    textString = textString.replacingOccurrences(of: unitString, with: "")
-                    textString += string + unitString
-                    textField.text = textString
-                } else if newLength <= 5 {
-                    textField.text = string + unitString
-                }
-                return false
-            }
+        if string == "" {
+            return true
         }
+
+        if var textString = textField.text {
+            let maxLength = textField.placeholder == R.string.locales.addProductDishCallories() ? 9 : 5
+
+            if textString.contains(unitString) && newLength <= maxLength {
+                textString = textString.replacingOccurrences(of: unitString, with: "")
+                textString += string + unitString
+                textField.text = textString
+            } else if newLength <= maxLength {
+                textField.text = string + unitString
+            }
+
+            return false
+        }
+
         return false
     }
 }

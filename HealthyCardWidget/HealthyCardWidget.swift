@@ -14,7 +14,7 @@ struct Provider: IntentTimelineProvider {
         SimpleEntry(
             date: Date(),
             configuration: ConfigurationIntent(),
-            data: WidgetModel()
+            data: WidgetModel(currentNutrition: NutritionModel(), dailyNutrition: NutritionModel())
         )
     }
 
@@ -23,12 +23,7 @@ struct Provider: IntentTimelineProvider {
         in context: Context,
         completion: @escaping (SimpleEntry) -> Void
     ) {
-        let userDefaults = UserDefaults(suiteName: "group.timis.Healthtify.Widget")
-        guard let data = userDefaults?.object(forKey: "dailyInfo") as? Data else { return }
-
-        guard let data = try? JSONDecoder().decode(WidgetModel.self, from: data) else { return }
-
-        let entry = SimpleEntry(date: Date(), configuration: configuration, data: data)
+        let entry = SimpleEntry(date: Date(), configuration: configuration, data: UserSettings.getDataWidget())
         completion(entry)
     }
 
@@ -38,16 +33,8 @@ struct Provider: IntentTimelineProvider {
         completion: @escaping (Timeline<Entry>) -> Void
     ) {
         var entries: [SimpleEntry] = []
-        var dataWidget: WidgetModel?
+        let dataWidget: WidgetModel = UserSettings.getDataWidget()
 
-        let userDefaults = UserDefaults(suiteName: "group.timis.Healthtify.Widget")
-        if let data = userDefaults?.object(forKey: "dailyInfo") as? Data {
-            if let data = try? JSONDecoder().decode(WidgetModel.self, from: data) {
-                dataWidget = data
-            }
-        }
-
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
@@ -75,19 +62,19 @@ struct HealthyCardWidgetEntryView: View {
                 HStack(alignment: .center, spacing: 50) {
                     VStack(alignment: .center, spacing: 10) {
                         Text("Fats")
-                        Text("\(data.nowProtein)/\(data.dayliProtein)")
+                        Text("\(data.currentNutrition.fats)/\(data.dailyNutrition.fats)")
                     }
                     VStack(alignment: .center, spacing: 10) {
                         Text("Protein")
-                        Text("\(data.nowFats)/\(data.dayliFats)")
+                        Text("\(data.currentNutrition.proteins)/\(data.dailyNutrition.proteins)")
                         VStack(alignment: .center, spacing: 20) {
                             Text("Callories")
-                            Text("\(data.nowCallories)/\(data.dayliCallories)")
+                            Text("\(data.currentNutrition.callories)/\(data.dailyNutrition.callories)")
                         }
                     }
                     VStack(alignment: .center, spacing: 10) {
                         Text("Carbs")
-                        Text("\(data.nowCarbs)/\(data.dayliCarbs)")
+                        Text("\(data.currentNutrition.carbs)/\(data.dailyNutrition.carbs)")
                     }
                 }
 
@@ -122,7 +109,7 @@ struct HealthyCardWidget_Previews: PreviewProvider {
             entry: SimpleEntry(
                 date: Date(),
                 configuration: ConfigurationIntent(),
-                data: WidgetModel()
+                data: WidgetModel(currentNutrition: NutritionModel(), dailyNutrition: NutritionModel())
             )
         )
             .previewContext(WidgetPreviewContext(family: .systemMedium))

@@ -8,10 +8,10 @@
 import Foundation
 
 protocol DataStoreManagerProtocol {
-    func setUser(_ user: UserCoreData)
+    func setUser(_ model: UserModel)
     func getUser() -> [UserCoreData]?
     func getProduct() -> [ProductCoreData]?
     func addProduct(_ model: ProductModel)
-    func getDayliNutrion() -> [DayliNutrionCoreData]?
+    func getDayliNutrion() -> [NutritionCoreData]?
     func updateDayliNutrition(_ model: NutritionModel)
 }

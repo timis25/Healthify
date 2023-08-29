@@ -7,8 +7,8 @@
 
 import UIKit
 
-class FoodEatViewCell: UITableViewCell {
-    // MARK: - UIElemets
+final class FoodEatViewCell: UITableViewCell {
+    // MARK: - UI Elemets
     private let cardView = UIView()
     private let dateLabel = UILabel()
     private let dishNameLabel = UILabel()
@@ -17,19 +17,25 @@ class FoodEatViewCell: UITableViewCell {
     private let proteinLabel = UILabel()
     private let calloriesLabel = UILabel()
 
+    // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setup()
     }
-    // MARK: - Public
-    public func setData(callories: Int, productName: String, date: String) {
-        calloriesLabel.text = "\(callories)\(R.string.locales.unitCallories())"
-        dishNameLabel.text = productName
-        dateLabel.text = date
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    // MARK: - Public methods
+    public func setData(_ model: ProductModel) {
+        let dateFormater = DateFormatter()
+        dateFormater.dateFormat = "dd.MMMM.yy  HH:mm"
+        calloriesLabel.text = "\(model.nutrition.callories)\(R.string.locales.unitCallories())"
+        dishNameLabel.text = model.productName
+        dateLabel.text = dateFormater.string(from: model.productDate)
     }
 
-    // MARK: - Private
-
+    // MARK: - Private methods
     private func setup() {
         configureCardView()
         configureDishNameLabel()
@@ -94,9 +100,5 @@ class FoodEatViewCell: UITableViewCell {
             make.top.equalToSuperview().offset(20)
             make.bottom.equalToSuperview().offset(-5)
         }
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

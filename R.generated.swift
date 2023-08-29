@@ -103,12 +103,12 @@ struct _R {
       /// Locales: en, ru
       var addProductTitle: RswiftResources.StringResource { .init(key: "AddProduct.Title", tableName: "locales", source: source, developmentValue: "Adding a dish", comment: nil) }
 
-      /// en translation: Daily calorie intake:
+      /// en translation: daily calorie intake:
       ///
       /// Key: Main.DayliCallories
       ///
       /// Locales: en, ru
-      var mainDayliCallories: RswiftResources.StringResource { .init(key: "Main.DayliCallories", tableName: "locales", source: source, developmentValue: "Daily calorie intake:", comment: nil) }
+      var mainDayliCallories: RswiftResources.StringResource { .init(key: "Main.DayliCallories", tableName: "locales", source: source, developmentValue: "daily calorie intake:", comment: nil) }
 
       /// en translation:      The last 10 dishes you ate:    
       ///

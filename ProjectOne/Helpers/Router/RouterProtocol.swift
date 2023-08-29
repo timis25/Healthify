@@ -14,4 +14,5 @@ protocol RouterProtocol {
     func initMainScreens()
     func showInfoProfileSetting(isShowAfterOnbording: Bool)
     func initAddProductScreen()
+    func pop()
 }

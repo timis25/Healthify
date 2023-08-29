@@ -33,6 +33,10 @@ final class Router: RouterProtocol {
     }
 
     // MARK: - Public methods
+    func pop() {
+        navigationController?.popViewController(animated: true)
+    }
+
     func initMainScreens() {
         if let navigationController = navigationController {
             let window = UIApplication.shared.windows[0]

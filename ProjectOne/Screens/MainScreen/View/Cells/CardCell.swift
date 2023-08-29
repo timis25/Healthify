@@ -8,7 +8,7 @@
 import UIKit
 
 final class CardCell: UITableViewCell {
-    // MARK: - UIElemets
+    // MARK: - UI Elemets
     private let cardView = UIView()
     private let proteinLabel = UILabel()
     private let fatsLabel = UILabel()
@@ -20,11 +20,16 @@ final class CardCell: UITableViewCell {
     private let carbsCountLabel = UILabel()
     private let fatsCountLabel = UILabel()
 
+    // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setup()
     }
 
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    // MARK: - Override methods
     override func layoutSubviews() {
         super.layoutSubviews()
         let colorTop = UIColor(hex: "#0583D2", alpha: 1)
@@ -33,35 +38,34 @@ final class CardCell: UITableViewCell {
         cardView.configureCardViewGradient(colorTop: colorTop, colorBottom: colorBottom)
     }
 
-    // MARK: - Public
-    public func setData(
-        dayliFats: String,
-        nowFats: String,
-        dayliCarbs: String,
-        nowCarbs: String,
-        dayliProtein: String,
-        nowProtein: String
-    ) {
-        carbsCountLabel.text = "\(nowCarbs)/\(dayliCarbs)\(R.string.locales.unitWeightGr())"
-        fatsCountLabel.text = "\(nowFats)/\(dayliFats)\(R.string.locales.unitWeightGr())"
-        proteinCountLabel.text = "\(nowProtein)/\(dayliProtein)\(R.string.locales.unitWeightGr())"
+    // MARK: - Public methods
+    public func setData(_ model: MainViewModel) {
+        let currentNutrition = model.currentNutrition
+        let dailyNutrition = model.dailyNutrition
 
-        let nowProtein = Double(nowProtein) ?? 0.0
-        let dayliProtein = Double(dayliProtein) ?? 0.0
-        let proteinProgress = nowProtein / dayliProtein
-        let nowFats = Double(nowFats) ?? 0.0
-        let dayliFats = Double(dayliFats) ?? 0.0
-        let fatsProgress = nowFats / dayliFats
-        let nowCarbs = Double(nowCarbs) ?? 0.0
-        let dayliCarbs = Double(dayliCarbs) ?? 0.0
-        let carbsProgress = nowCarbs / dayliCarbs
+        carbsCountLabel.text = "\(dailyNutrition.carbs)/\(currentNutrition.carbs)\(R.string.locales.unitWeightGr())"
+
+        fatsCountLabel.text = "\(dailyNutrition.fats)/\(currentNutrition.fats)\(R.string.locales.unitWeightGr())"
+
+        let proteinsRatioText = "\(dailyNutrition.proteins)/\(currentNutrition.proteins)"
+        proteinCountLabel.text = "\(proteinsRatioText)\(R.string.locales.unitWeightGr())"
+
+        let nowProtein = Double(currentNutrition.proteins)
+        let dailyProteins = Double(dailyNutrition.proteins)
+        let proteinProgress = dailyProteins / nowProtein
+        let nowFats = Double(currentNutrition.fats)
+        let dailyFats = Double(dailyNutrition.fats)
+        let fatsProgress = dailyFats / nowFats
+        let nowCarbs = Double(currentNutrition.carbs)
+        let dailyCarbs = Double(dailyNutrition.carbs)
+        let carbsProgress = dailyCarbs / nowCarbs
 
         fatsProgressView.progress = Float(fatsProgress)
         carbsProgressView.progress = Float(carbsProgress)
         proteinProgressView.progress = Float(proteinProgress)
     }
 
-    // MARK: - Private
+    // MARK: - Private methods
 
     private func setup() {
         configureCardView()
@@ -225,9 +229,5 @@ final class CardCell: UITableViewCell {
             make.height.equalTo(250)
             make.bottom.equalToSuperview().offset(-15)
         }
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

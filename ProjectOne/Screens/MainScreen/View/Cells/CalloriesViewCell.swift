@@ -8,17 +8,22 @@
 import UIKit
 
 final class CalloriesViewCell: UITableViewCell {
-    // MARK: - UIElemets
+    // MARK: - UI Elemets
     private let cardView = UIView()
     private let calloriesLabel = UILabel()
     private let calloriesCountLabel = UILabel()
     private let rateCalloriesLabel = UILabel()
 
+    // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setup()
     }
 
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    // MARK: - Override methods
     override func layoutSubviews() {
         super.layoutSubviews()
         let colorTop = UIColor(hex: "#0583D2", alpha: 1)
@@ -26,14 +31,13 @@ final class CalloriesViewCell: UITableViewCell {
 
         cardView.configureCardViewGradient(colorTop: colorBottom, colorBottom: colorTop)
     }
-    // MARK: - Public
-    public func setData(rateCallories: String, dayliCallories: String, nowCallories: String) {
-        calloriesCountLabel.text = "\(nowCallories)/ \(dayliCallories)"
-        rateCalloriesLabel.text = rateCallories
+    // MARK: - Public methods
+    public func setData(_ model: MainViewModel) {
+        calloriesCountLabel.text = "\(model.dailyNutrition.callories) /\(model.currentNutrition.callories)"
+        rateCalloriesLabel.text = model.currentNutrition.callories > model.dailyNutrition.callories ?  "👍" : "👎"
     }
 
-    // MARK: - Private
-
+    // MARK: - Private methods
     private func setup() {
         configureCardView()
         configureCalloriesLabel()
@@ -94,9 +98,5 @@ final class CalloriesViewCell: UITableViewCell {
             make.height.equalTo(120)
             make.bottom.equalToSuperview().inset(25)
         }
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

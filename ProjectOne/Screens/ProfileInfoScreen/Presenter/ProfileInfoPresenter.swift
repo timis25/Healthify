@@ -7,34 +7,26 @@
 
 import Foundation
 
-protocol ProfileInfoViewProtocol: AnyObject {
-}
-
 protocol ProfileInfoPresenterProtocol: AnyObject {
-    init(view: ProfileInfoViewProtocol, router: RouterProtocol, dataStorageManager: DataStoreManagerProtocol)
-//    func setUser(name: String, birthDate: String, isMale: Bool, physicalState: Int, weight: Int, height: Int)
+    func setUser(_ user: UserModel)
 }
 
-class ProfileInfoPresenter: ProfileInfoPresenterProtocol {
+final class ProfileInfoPresenter: ProfileInfoPresenterProtocol {
+    // MARK: - Public properties
     weak var view: ProfileInfoViewProtocol?
-    var router: RouterProtocol
-    let dataManager: DataStoreManagerProtocol!
+    // MARK: - Private  properties
+    private let router: RouterProtocol
+    private let dataManager: DataStoreManagerProtocol
 
-    required init(view: ProfileInfoViewProtocol, router: RouterProtocol, dataStorageManager: DataStoreManagerProtocol) {
-        self.view = view
+    // MARK: - Init
+    init(router: RouterProtocol, dataStorageManager: DataStoreManagerProtocol) {
         self.router = router
         self.dataManager = dataStorageManager
     }
 
-    func setUser(_ user: UserCoreData) {
-//        dataManager.setUser(
-//            name: name,
-//            birthDate: birthDate,
-//            isMale: isMale,
-//            physicalState: physicalState,
-//            weight: weight,
-//            height: height
-//        )
+    // MARK: - Public methods
+    func setUser(_ user: UserModel) {
+        dataManager.setUser(user)
         router.initMainScreens()
         UserSettings.setIsShowStartProfileSettings(true)
         UserSettings.setNowDay(Date())

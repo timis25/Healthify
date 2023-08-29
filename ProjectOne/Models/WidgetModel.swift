@@ -8,12 +8,6 @@
 import Foundation
 
 struct WidgetModel: Codable {
-    var dayliFats: String = ""
-    var nowFats: String = ""
-    var dayliCarbs: String = ""
-    var nowCarbs: String = ""
-    var dayliProtein: String = ""
-    var nowProtein: String = ""
-    var nowCallories: String = ""
-    var dayliCallories: String = ""
+    var currentNutrition: NutritionModel
+    var dailyNutrition: NutritionModel
 }

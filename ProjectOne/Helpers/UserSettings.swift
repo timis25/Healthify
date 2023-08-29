@@ -12,9 +12,34 @@ final class UserSettings {
         static let isShowMainId: String = "com.userSettings.isShowMan"
         static let isShowProfileId: String = "com.userSettings.isShowProfile"
         static let dayTodayId: String = "com.userSettings.DayToday"
+        static let widgetInfoId: String = "com.userSettings.DailyInfo"
+        static let widgetUserDefautlsId: String = "group.timis.Healthtify.Widget"
     }
 
     // MARK: - Public static methods
+    static func addDataToWidget(_ widgetData: WidgetModel) {
+        let userDefaults = UserDefaults(suiteName: Constants.widgetUserDefautlsId)
+        guard let data = try? JSONEncoder().encode(widgetData) else { return }
+        userDefaults?.set(data, forKey: Constants.widgetInfoId)
+    }
+
+    static func getDataWidget() -> WidgetModel {
+        let userDefaults = UserDefaults(suiteName: Constants.widgetUserDefautlsId)
+        guard let data = userDefaults?.object(
+            forKey: Constants.widgetInfoId
+        ) as? Data
+        else {
+            return WidgetModel(currentNutrition: NutritionModel(), dailyNutrition: NutritionModel())
+        }
+        guard let model = try? JSONDecoder().decode(
+            WidgetModel.self,
+            from: data
+        ) else {
+            return WidgetModel(currentNutrition: NutritionModel(), dailyNutrition: NutritionModel())
+        }
+        return model
+    }
+
     static func isShowMain() -> Bool {
         return UserDefaults.standard.bool(forKey: Constants.isShowMainId)
     }

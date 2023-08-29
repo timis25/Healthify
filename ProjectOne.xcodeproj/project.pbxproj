@@ -39,6 +39,12 @@
 		0788815A2A9D13B2001557C3 /* DataStoreManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078881592A9D13B2001557C3 /* DataStoreManagerProtocol.swift */; };
 		0788815E2A9D17FB001557C3 /* AssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0788815D2A9D17FB001557C3 /* AssemblyProtocol.swift */; };
 		078881612A9D1859001557C3 /* RouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078881602A9D1859001557C3 /* RouterProtocol.swift */; };
+		078881632A9D1B37001557C3 /* MainPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078881622A9D1B37001557C3 /* MainPresenterProtocol.swift */; };
+		078881652A9D1E7E001557C3 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078881642A9D1E7E001557C3 /* UserModel.swift */; };
+		078881682A9D24E7001557C3 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078881672A9D24E7001557C3 /* MainViewModel.swift */; };
+		0788817D2A9E4A7F001557C3 /* NutritionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078881552A9CFD50001557C3 /* NutritionModel.swift */; };
+		0788817E2A9E4AA4001557C3 /* Health.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0779B50126E4D37C00838FCA /* Health.xcdatamodeld */; };
+		078881832A9E52BA001557C3 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0770156226F733E800369B78 /* UserSettings.swift */; };
 		07904D9A2701AEEE00E24264 /* String+RemoveCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07904D992701AEEE00E24264 /* String+RemoveCharacters.swift */; };
 		07904D9C2701AF2600E24264 /* UIView+CardViewGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07904D9B2701AF2600E24264 /* UIView+CardViewGradient.swift */; };
 		07904D9E2701AF2F00E24264 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07904D9D2701AF2F00E24264 /* UIColor+Hex.swift */; };
@@ -129,6 +135,9 @@
 		078881592A9D13B2001557C3 /* DataStoreManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStoreManagerProtocol.swift; sourceTree = "<group>"; };
 		0788815D2A9D17FB001557C3 /* AssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyProtocol.swift; sourceTree = "<group>"; };
 		078881602A9D1859001557C3 /* RouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterProtocol.swift; sourceTree = "<group>"; };
+		078881622A9D1B37001557C3 /* MainPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenterProtocol.swift; sourceTree = "<group>"; };
+		078881642A9D1E7E001557C3 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		078881672A9D24E7001557C3 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		07904D992701AEEE00E24264 /* String+RemoveCharacters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+RemoveCharacters.swift"; sourceTree = "<group>"; };
 		07904D9B2701AF2600E24264 /* UIView+CardViewGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+CardViewGradient.swift"; sourceTree = "<group>"; };
 		07904D9D2701AF2F00E24264 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
@@ -271,6 +280,7 @@
 				078881572A9CFE6B001557C3 /* ProductModel.swift */,
 				073155D026FC76F9000C788E /* PhisicalStateModel.swift */,
 				070C0B072768B19B0009D319 /* WidgetModel.swift */,
+				078881642A9D1E7E001557C3 /* UserModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -318,6 +328,14 @@
 				078881602A9D1859001557C3 /* RouterProtocol.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		078881662A9D24DC001557C3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				078881672A9D24E7001557C3 /* MainViewModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		07AA9D4128AEA61500EB43E4 /* Managers */ = {
@@ -427,6 +445,7 @@
 		07F4FF9E26E3702B0052DD56 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
+				078881662A9D24DC001557C3 /* Model */,
 				07F4FFA026E370460052DD56 /* Presenter */,
 				07F4FF9F26E370380052DD56 /* View */,
 			);
@@ -446,6 +465,7 @@
 			isa = PBXGroup;
 			children = (
 				07F4FFA226E3728F0052DD56 /* MainPresenter.swift */,
+				078881622A9D1B37001557C3 /* MainPresenterProtocol.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -796,6 +816,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0788817E2A9E4AA4001557C3 /* Health.xcdatamodeld in Sources */,
+				078881832A9E52BA001557C3 /* UserSettings.swift in Sources */,
+				0788817D2A9E4A7F001557C3 /* NutritionModel.swift in Sources */,
 				070C0B092768B3790009D319 /* WidgetModel.swift in Sources */,
 				0710D8B227689383001B9E6B /* HealthyCardWidget.intentdefinition in Sources */,
 				0710D8AD27689381001B9E6B /* HealthyCardWidget.swift in Sources */,
@@ -813,11 +836,13 @@
 				072EDDF3276872DB00FF8616 /* AddProductPresenter.swift in Sources */,
 				079DC496271462D200F16087 /* AddProductViewController.swift in Sources */,
 				07F4FF6D26E36B690052DD56 /* AppDelegate.swift in Sources */,
+				078881652A9D1E7E001557C3 /* UserModel.swift in Sources */,
 				0779B50A26E4DA9600838FCA /* DataStoreManager.swift in Sources */,
 				0710D8B327689383001B9E6B /* HealthyCardWidget.intentdefinition in Sources */,
 				073155F426FF2C0E000C788E /* StartButtonViewCell.swift in Sources */,
 				078881512A9CF90B001557C3 /* R.generated.swift in Sources */,
 				07F4FFA626E377080052DD56 /* Assembly.swift in Sources */,
+				078881682A9D24E7001557C3 /* MainViewModel.swift in Sources */,
 				0770157226F87E1C00369B78 /* AdditionalInfoViewCell.swift in Sources */,
 				073155F726FF2C6E000C788E /* BaseButton.swift in Sources */,
 				07904D9C2701AF2600E24264 /* UIView+CardViewGradient.swift in Sources */,
@@ -827,6 +852,7 @@
 				0770154126F34C1800369B78 /* FoodEatViewCell.swift in Sources */,
 				070C0B082768B19B0009D319 /* WidgetModel.swift in Sources */,
 				0770156826F74E0D00369B78 /* ProfileInfoPresenter.swift in Sources */,
+				078881632A9D1B37001557C3 /* MainPresenterProtocol.swift in Sources */,
 				0770153F26F3267600369B78 /* CalloriesViewCell.swift in Sources */,
 				078881612A9D1859001557C3 /* RouterProtocol.swift in Sources */,
 				07904DA02701AFBA00E24264 /* VerticalTextView.swift in Sources */,

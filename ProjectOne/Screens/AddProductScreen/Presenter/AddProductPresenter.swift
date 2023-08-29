@@ -9,19 +9,19 @@ import Foundation
 import WidgetKit
 
 protocol AddProductPresenterProtocol: AnyObject {
-    init(view: AddProductViewProtocol, router: RouterProtocol, dataStorageManager: DataStoreManagerProtocol)
     func addProduct(_ productModel: ProductModel)
 }
 
 final class AddProductPresenter: AddProductPresenterProtocol {
     // MARK: - Private properties
-    private weak var view: AddProductViewProtocol?
     private var router: RouterProtocol
     private let dataManager: DataStoreManagerProtocol
 
+    // MARK: - Public properties
+    weak var view: AddProductViewProtocol?
+
     // MARK: - Init
-    init(view: AddProductViewProtocol, router: RouterProtocol, dataStorageManager: DataStoreManagerProtocol) {
-        self.view = view
+    init(router: RouterProtocol, dataStorageManager: DataStoreManagerProtocol) {
         self.router = router
         self.dataManager = dataStorageManager
     }
@@ -30,5 +30,6 @@ final class AddProductPresenter: AddProductPresenterProtocol {
     func addProduct(_ productModel: ProductModel) {
         dataManager.addProduct(productModel)
         dataManager.updateDayliNutrition(productModel.nutrition)
+        router.pop()
     }
 }

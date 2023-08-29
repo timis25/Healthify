@@ -11,15 +11,23 @@ protocol StartButtonViewCellProtocol: AnyObject {
     func startButtonDidTouch()
 }
 
-class StartButtonViewCell: UITableViewCell {
-    let startButton = BaseButton()
+final class StartButtonViewCell: UITableViewCell {
+    // MARK: - UI Elements
+    private let startButton = BaseButton()
+
+    // MARK: - Public properties
     weak var delegate: StartButtonViewCellProtocol?
 
+    // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureStartButton()
     }
 
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    // MARK: - Private methods
     private func configureStartButton() {
         contentView.addSubview(startButton)
 
@@ -36,11 +44,8 @@ class StartButtonViewCell: UITableViewCell {
         }
     }
 
+    // MARK: - Actions
     @objc func startButtonAction() {
         delegate?.startButtonDidTouch()
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
