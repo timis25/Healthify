@@ -40,56 +40,16 @@ final class DataStoreManager: DataStoreManagerProtocol {
         }
     }
     // MARK: - Public methods
-    func updateDayliNutrition(_ model: NutritionModel) {
-        if let data = getDayliNutrion()?.last {
-            data.callories += Int32(model.callories)
-            data.carbs += Int16(model.carbs)
-            data.protein += Int16(model.proteins)
-            data.fats += Int16(model.fats)
-        } else {
-            let product = NutritionCoreData(context: viewContext)
-            product.callories = Int32(model.callories)
-            product.carbs = Int16(model.carbs)
-            product.protein = Int16(model.proteins)
-            product.fats = Int16(model.fats)
-        }
-
-        saveContext()
-    }
-
-    func getDayliNutrion() -> [NutritionCoreData]? {
-        var nutrion: [NutritionCoreData]?
-
-        do {
-            if !UserSettings.isThisDay() {
-                if let result = try? viewContext.fetch(NutritionCoreData.fetchRequest()) {
-                    for object in result {
-                        viewContext.delete(object)
-                    }
-                    saveContext()
-                    UserSettings.setNowDay(Date())
-                }
-            }
-            try nutrion = viewContext.fetch(NutritionCoreData.fetchRequest())
-        } catch let error as NSError {
-            fatalError("Could not fetch request \(error), \(error.userInfo)")
-        }
-
-        return nutrion
-    }
-
     func addProduct(_ model: ProductModel) {
         let product = ProductCoreData(context: viewContext)
-        let nutritionCoreData = NutritionCoreData(context: viewContext)
-        nutritionCoreData.callories = Int32(model.nutrition.callories)
-        nutritionCoreData.protein = Int16(model.nutrition.proteins)
-        nutritionCoreData.carbs = Int16(model.nutrition.carbs)
-        nutritionCoreData.fats = Int16(model.nutrition.fats)
 
         product.name = model.productName
         product.date = Date()
-        product.nutritionCoreData = nutritionCoreData
-
+        product.nutritionCoreData = NutritionCoreData(context: viewContext)
+        product.nutritionCoreData?.callories = Int32(model.nutrition.callories)
+        product.nutritionCoreData?.protein = Int16(model.nutrition.proteins)
+        product.nutritionCoreData?.carbs = Int16(model.nutrition.carbs)
+        product.nutritionCoreData?.fats = Int16(model.nutrition.fats)
         saveContext()
     }
 
@@ -98,6 +58,7 @@ final class DataStoreManager: DataStoreManagerProtocol {
 
         do {
             try products = viewContext.fetch(ProductCoreData.fetchRequest())
+            products = products?.filter({ $0.date?.toDate() == Date().toDate() })
         } catch let error as NSError {
             fatalError("Could not fetch request \(error), \(error.userInfo)")
         }

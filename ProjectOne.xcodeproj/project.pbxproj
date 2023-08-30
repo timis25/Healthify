@@ -45,11 +45,17 @@
 		0788817D2A9E4A7F001557C3 /* NutritionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078881552A9CFD50001557C3 /* NutritionModel.swift */; };
 		0788817E2A9E4AA4001557C3 /* Health.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0779B50126E4D37C00838FCA /* Health.xcdatamodeld */; };
 		078881832A9E52BA001557C3 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0770156226F733E800369B78 /* UserSettings.swift */; };
+		078881862A9F1816001557C3 /* MainScreenLocale.strings in Resources */ = {isa = PBXBuildFile; fileRef = 078881882A9F1816001557C3 /* MainScreenLocale.strings */; };
+		0788818B2A9F23CF001557C3 /* MainViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0788818A2A9F23CF001557C3 /* MainViewProtocol.swift */; };
+		078881902A9F26BB001557C3 /* ProfileInfoLocale.strings in Resources */ = {isa = PBXBuildFile; fileRef = 078881922A9F26BB001557C3 /* ProfileInfoLocale.strings */; };
+		078881942A9F26DA001557C3 /* AddProductLocale.strings in Resources */ = {isa = PBXBuildFile; fileRef = 078881962A9F26DA001557C3 /* AddProductLocale.strings */; };
+		078881992A9F34F3001557C3 /* Date+DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078881982A9F34F3001557C3 /* Date+DateFormatter.swift */; };
+		0788819A2A9F3A40001557C3 /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078881572A9CFE6B001557C3 /* ProductModel.swift */; };
 		07904D9A2701AEEE00E24264 /* String+RemoveCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07904D992701AEEE00E24264 /* String+RemoveCharacters.swift */; };
 		07904D9C2701AF2600E24264 /* UIView+CardViewGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07904D9B2701AF2600E24264 /* UIView+CardViewGradient.swift */; };
 		07904D9E2701AF2F00E24264 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07904D9D2701AF2F00E24264 /* UIColor+Hex.swift */; };
 		07904DA02701AFBA00E24264 /* VerticalTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07904D9F2701AFBA00E24264 /* VerticalTextView.swift */; };
-		07904DB02703306800E24264 /* locales.strings in Resources */ = {isa = PBXBuildFile; fileRef = 07904DB22703306800E24264 /* locales.strings */; };
+		07904DB02703306800E24264 /* GeneralLocale.strings in Resources */ = {isa = PBXBuildFile; fileRef = 07904DB22703306800E24264 /* GeneralLocale.strings */; };
 		079DC496271462D200F16087 /* AddProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079DC495271462D200F16087 /* AddProductViewController.swift */; };
 		07E7D79A26E37C8F00B901AF /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E7D79926E37C8F00B901AF /* Router.swift */; };
 		07F4FF6D26E36B690052DD56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F4FF6C26E36B690052DD56 /* AppDelegate.swift */; };
@@ -138,13 +144,21 @@
 		078881622A9D1B37001557C3 /* MainPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenterProtocol.swift; sourceTree = "<group>"; };
 		078881642A9D1E7E001557C3 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		078881672A9D24E7001557C3 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		078881872A9F1816001557C3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainScreenLocale.strings; sourceTree = "<group>"; };
+		078881892A9F1817001557C3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MainScreenLocale.strings; sourceTree = "<group>"; };
+		0788818A2A9F23CF001557C3 /* MainViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewProtocol.swift; sourceTree = "<group>"; };
+		078881912A9F26BB001557C3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ProfileInfoLocale.strings; sourceTree = "<group>"; };
+		078881932A9F26BF001557C3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/ProfileInfoLocale.strings; sourceTree = "<group>"; };
+		078881952A9F26DA001557C3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AddProductLocale.strings; sourceTree = "<group>"; };
+		078881972A9F26DC001557C3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/AddProductLocale.strings; sourceTree = "<group>"; };
+		078881982A9F34F3001557C3 /* Date+DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+DateFormatter.swift"; sourceTree = "<group>"; };
 		07904D992701AEEE00E24264 /* String+RemoveCharacters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+RemoveCharacters.swift"; sourceTree = "<group>"; };
 		07904D9B2701AF2600E24264 /* UIView+CardViewGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+CardViewGradient.swift"; sourceTree = "<group>"; };
 		07904D9D2701AF2F00E24264 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		07904D9F2701AFBA00E24264 /* VerticalTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalTextView.swift; sourceTree = "<group>"; };
-		07904DB12703306800E24264 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/locales.strings; sourceTree = "<group>"; };
+		07904DB12703306800E24264 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/GeneralLocale.strings; sourceTree = "<group>"; };
 		07904DB32703309600E24264 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		07904DB42703309600E24264 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/locales.strings; sourceTree = "<group>"; };
+		07904DB42703309600E24264 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/GeneralLocale.strings; sourceTree = "<group>"; };
 		079DC495271462D200F16087 /* AddProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductViewController.swift; sourceTree = "<group>"; };
 		07E7D79926E37C8F00B901AF /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		07F4FF6926E36B690052DD56 /* ProjectOne.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectOne.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -224,6 +238,7 @@
 				07904D9D2701AF2F00E24264 /* UIColor+Hex.swift */,
 				0748CE8D279FFF66009685B7 /* UIViewController+CustonNavBar.swift */,
 				0748CE9127A00443009685B7 /* UITabbarController+DefaultApearance.swift */,
+				078881982A9F34F3001557C3 /* Date+DateFormatter.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -231,6 +246,7 @@
 		0770156426F74DB100369B78 /* ProfileInfoScreen */ = {
 			isa = PBXGroup;
 			children = (
+				078881922A9F26BB001557C3 /* ProfileInfoLocale.strings */,
 				0770156526F74DC000369B78 /* Presenter */,
 				0770156626F74DCA00369B78 /* View */,
 			);
@@ -289,6 +305,7 @@
 			isa = PBXGroup;
 			children = (
 				07F4FF7026E36B690052DD56 /* MainViewController.swift */,
+				0788818A2A9F23CF001557C3 /* MainViewProtocol.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -369,6 +386,7 @@
 		07DB6674270F1D57006A7FAA /* AddProductScreen */ = {
 			isa = PBXGroup;
 			children = (
+				078881962A9F26DA001557C3 /* AddProductLocale.strings */,
 				07DB6676270F1E5E006A7FAA /* View */,
 				07DB6675270F1E54006A7FAA /* Presenter */,
 			);
@@ -421,7 +439,7 @@
 				07F4FF7A26E36B6D0052DD56 /* Info.plist */,
 				07AA9D4428AEA64300EB43E4 /* Utils */,
 				07AA9D4128AEA61500EB43E4 /* Managers */,
-				07904DB22703306800E24264 /* locales.strings */,
+				07904DB22703306800E24264 /* GeneralLocale.strings */,
 				070C0B032768AD290009D319 /* ProjectOne.entitlements */,
 				073155F526FF2C52000C788E /* Extensions */,
 				0779B50826E4D66600838FCA /* Models */,
@@ -448,6 +466,7 @@
 				078881662A9D24DC001557C3 /* Model */,
 				07F4FFA026E370460052DD56 /* Presenter */,
 				07F4FF9F26E370380052DD56 /* View */,
+				078881882A9F1816001557C3 /* MainScreenLocale.strings */,
 			);
 			path = MainScreen;
 			sourceTree = "<group>";
@@ -647,8 +666,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				078881942A9F26DA001557C3 /* AddProductLocale.strings in Resources */,
 				07F4FF7926E36B6D0052DD56 /* LaunchScreen.storyboard in Resources */,
-				07904DB02703306800E24264 /* locales.strings in Resources */,
+				078881902A9F26BB001557C3 /* ProfileInfoLocale.strings in Resources */,
+				078881862A9F1816001557C3 /* MainScreenLocale.strings in Resources */,
+				07904DB02703306800E24264 /* GeneralLocale.strings in Resources */,
 				07F4FF7626E36B6D0052DD56 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -672,6 +694,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		0779B4FD26E4BDE600838FCA /* R Swift */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -821,6 +844,7 @@
 				0788817D2A9E4A7F001557C3 /* NutritionModel.swift in Sources */,
 				070C0B092768B3790009D319 /* WidgetModel.swift in Sources */,
 				0710D8B227689383001B9E6B /* HealthyCardWidget.intentdefinition in Sources */,
+				0788819A2A9F3A40001557C3 /* ProductModel.swift in Sources */,
 				0710D8AD27689381001B9E6B /* HealthyCardWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -838,6 +862,7 @@
 				07F4FF6D26E36B690052DD56 /* AppDelegate.swift in Sources */,
 				078881652A9D1E7E001557C3 /* UserModel.swift in Sources */,
 				0779B50A26E4DA9600838FCA /* DataStoreManager.swift in Sources */,
+				0788818B2A9F23CF001557C3 /* MainViewProtocol.swift in Sources */,
 				0710D8B327689383001B9E6B /* HealthyCardWidget.intentdefinition in Sources */,
 				073155F426FF2C0E000C788E /* StartButtonViewCell.swift in Sources */,
 				078881512A9CF90B001557C3 /* R.generated.swift in Sources */,
@@ -852,6 +877,7 @@
 				0770154126F34C1800369B78 /* FoodEatViewCell.swift in Sources */,
 				070C0B082768B19B0009D319 /* WidgetModel.swift in Sources */,
 				0770156826F74E0D00369B78 /* ProfileInfoPresenter.swift in Sources */,
+				078881992A9F34F3001557C3 /* Date+DateFormatter.swift in Sources */,
 				078881632A9D1B37001557C3 /* MainPresenterProtocol.swift in Sources */,
 				0770153F26F3267600369B78 /* CalloriesViewCell.swift in Sources */,
 				078881612A9D1859001557C3 /* RouterProtocol.swift in Sources */,
@@ -905,13 +931,40 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		07904DB22703306800E24264 /* locales.strings */ = {
+		078881882A9F1816001557C3 /* MainScreenLocale.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				078881872A9F1816001557C3 /* en */,
+				078881892A9F1817001557C3 /* ru */,
+			);
+			name = MainScreenLocale.strings;
+			sourceTree = "<group>";
+		};
+		078881922A9F26BB001557C3 /* ProfileInfoLocale.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				078881912A9F26BB001557C3 /* en */,
+				078881932A9F26BF001557C3 /* ru */,
+			);
+			name = ProfileInfoLocale.strings;
+			sourceTree = "<group>";
+		};
+		078881962A9F26DA001557C3 /* AddProductLocale.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				078881952A9F26DA001557C3 /* en */,
+				078881972A9F26DC001557C3 /* ru */,
+			);
+			name = AddProductLocale.strings;
+			sourceTree = "<group>";
+		};
+		07904DB22703306800E24264 /* GeneralLocale.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				07904DB12703306800E24264 /* en */,
 				07904DB42703309600E24264 /* ru */,
 			);
-			name = locales.strings;
+			name = GeneralLocale.strings;
 			sourceTree = "<group>";
 		};
 		07F4FF7726E36B6D0052DD56 /* LaunchScreen.storyboard */ = {

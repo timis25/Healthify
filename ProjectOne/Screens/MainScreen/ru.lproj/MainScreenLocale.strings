@@ -1,0 +1,12 @@
+/* 
+  MainScreenLocale.strings
+  ProjectOne
+
+  Created by Timur Israilov on 30/08/23.
+  
+*/
+
+Welcome.Text = "Добрый день";
+Main.Title = "Главная";
+Main.LastDishes = "     Последние 10 блюд которые Вы съели    ";
+Main.DayliCallories = "Суточная норма калорий:";

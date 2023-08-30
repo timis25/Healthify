@@ -25,22 +25,17 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationController = UINavigationController()
         let assembly = Assembly()
         let dataStoreManager = DataStoreManager()
-        let tabBarController = UITabBarController()
-        tabBarController.setDefaultApearance()
         let router = Router(
             navigationController: navigationController,
             assembly: assembly,
             dataStorage: dataStoreManager,
-            window: window!,
-            tabBarController: tabBarController
+            window: window!
         )
 
         if UserSettings.isShowStartProfileSettings() {
             router.initMainScreens()
-            window?.rootViewController = tabBarController
         } else {
             router.showInfoProfileSetting(isShowAfterOnbording: true)
-            window?.rootViewController = navigationController
         }
         window?.makeKeyAndVisible()
     }

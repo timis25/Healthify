@@ -1,0 +1,23 @@
+/* 
+  ProfileInfoLocale.strings
+  ProjectOne
+
+  Created by Timur Israilov on 30/08/23.
+  
+*/
+
+Profile.Name = "Ваше имя";
+Profile.Enter.Name = "Введите ваше имя...";
+Profile.Height = "Ваш рост";
+Profile.Enter.Height = "Введите ваш рост...";
+Profile.Weight = "Ваш вес";
+Profile.Enter.Weight = "Введите ваш вес...";
+Profile.Birthday = "Ваша дата рождения";
+Profile.Enter.Birthday = "Введите вашу дату рождения";
+Profile.AdditionalInfo = "Дополнительная информация";
+Profile.Enter.PhysxState = "Введите ваше физическое состояние...";
+Profile.Male = "Мужской";
+Profile.Female = "Женский";
+Profile.Start = "Начать";
+Profile.Title.FillForm = "Заполнение формы";
+Profile.Select.PhysicalActivity = "Выбрите Вашу физическую активность";

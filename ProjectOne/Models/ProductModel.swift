@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ProductModel {
+struct ProductModel: Codable {
     var productName: String
     var productDate: Date
     var note: String
@@ -26,8 +26,6 @@ struct ProductModel {
     }
 
     init(_ model: ProductCoreData) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd.MM.yyyy"
         self.productName = model.name ?? ""
         self.note = model.note ?? ""
         self.productDate = model.date ?? Date()

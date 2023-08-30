@@ -29,13 +29,13 @@ final class UserSettings {
             forKey: Constants.widgetInfoId
         ) as? Data
         else {
-            return WidgetModel(currentNutrition: NutritionModel(), dailyNutrition: NutritionModel())
+            return WidgetModel(todayProducts: [], dailyNutrition: NutritionModel())
         }
         guard let model = try? JSONDecoder().decode(
             WidgetModel.self,
             from: data
         ) else {
-            return WidgetModel(currentNutrition: NutritionModel(), dailyNutrition: NutritionModel())
+            return WidgetModel(todayProducts: [], dailyNutrition: NutritionModel())
         }
         return model
     }

@@ -23,18 +23,11 @@ final class CalloriesViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    // MARK: - Override methods
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        let colorTop = UIColor(hex: "#0583D2", alpha: 1)
-        let colorBottom = UIColor(hex: "#61B0B7", alpha: 1)
-
-        cardView.configureCardViewGradient(colorTop: colorBottom, colorBottom: colorTop)
-    }
     // MARK: - Public methods
     public func setData(_ model: MainViewModel) {
-        calloriesCountLabel.text = "\(model.dailyNutrition.callories) /\(model.currentNutrition.callories)"
-        rateCalloriesLabel.text = model.currentNutrition.callories > model.dailyNutrition.callories ?  "👍" : "👎"
+        let calloriesToday = model.todayProducts.map { $0.nutrition.callories }.reduce(0, +)
+        calloriesCountLabel.text = "\(calloriesToday)/\(model.dailyNutrition.callories)"
+        rateCalloriesLabel.text = calloriesToday < model.dailyNutrition.callories ?  "👍" : "👎"
     }
 
     // MARK: - Private methods
@@ -72,31 +65,30 @@ final class CalloriesViewCell: UITableViewCell {
     private func configureCalloriesLabel() {
         cardView.addSubview(calloriesLabel)
 
-        calloriesLabel.text = R.string.locales.mainDayliCallories()
+        calloriesLabel.text = R.string.mainScreenLocale.mainDayliCallories()
         calloriesLabel.font = .systemFont(ofSize: 21)
         calloriesLabel.textColor = .white
 
         calloriesLabel.snp.makeConstraints { make in
-            make.top.equalTo(10)
+            make.top.equalToSuperview().offset(10)
             make.centerX.equalToSuperview()
         }
     }
 
     private func configureCardView() {
         contentView.addSubview(cardView)
-        cardView.backgroundColor = .white
+        cardView.backgroundColor = UIColor(hex: "#61B0B7", alpha: 1)
         cardView.layer.cornerRadius = 10
         cardView.layer.shadowOffset = .zero
-        cardView.layer.shadowColor = UIColor(hex: "#0583D2", alpha: 1).cgColor
+        cardView.layer.shadowColor = UIColor(hex: "#61B0B7", alpha: 1).cgColor
         cardView.layer.shadowRadius = 5
         cardView.layer.shadowOpacity = 3
 
         cardView.snp.makeConstraints { make in
-            make.width.equalToSuperview().inset(9)
-            make.left.equalTo(9)
+            make.left.right.equalToSuperview().inset(9)
             make.top.equalToSuperview().offset(15)
             make.height.equalTo(120)
-            make.bottom.equalToSuperview().inset(25)
+            make.bottom.equalToSuperview().offset(-25)
         }
     }
 }

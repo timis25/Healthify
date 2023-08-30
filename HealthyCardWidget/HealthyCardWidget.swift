@@ -14,7 +14,7 @@ struct Provider: IntentTimelineProvider {
         SimpleEntry(
             date: Date(),
             configuration: ConfigurationIntent(),
-            data: WidgetModel(currentNutrition: NutritionModel(), dailyNutrition: NutritionModel())
+            data: WidgetModel(todayProducts: [], dailyNutrition: NutritionModel())
         )
     }
 
@@ -58,23 +58,28 @@ struct HealthyCardWidgetEntryView: View {
 
     var body: some View {
         if let data = entry.data {
+            let carbsToday = data.todayProducts.map { $0.nutrition.carbs }.reduce(0, +)
+            let fatsToday = data.todayProducts.map { $0.nutrition.fats }.reduce(0, +)
+            let proteinsToday = data.todayProducts.map { $0.nutrition.proteins }.reduce(0, +)
+            let calloriesToday = data.todayProducts.map { $0.nutrition.callories }.reduce(0, +)
+
             VStack(alignment: .center, spacing: 10) {
                 HStack(alignment: .center, spacing: 50) {
                     VStack(alignment: .center, spacing: 10) {
                         Text("Fats")
-                        Text("\(data.currentNutrition.fats)/\(data.dailyNutrition.fats)")
+                        Text("\(fatsToday)/\(data.dailyNutrition.fats)")
                     }
                     VStack(alignment: .center, spacing: 10) {
                         Text("Protein")
-                        Text("\(data.currentNutrition.proteins)/\(data.dailyNutrition.proteins)")
+                        Text("\(proteinsToday)/\(data.dailyNutrition.proteins)")
                         VStack(alignment: .center, spacing: 20) {
                             Text("Callories")
-                            Text("\(data.currentNutrition.callories)/\(data.dailyNutrition.callories)")
+                            Text("\(calloriesToday)/\(data.dailyNutrition.callories)")
                         }
                     }
                     VStack(alignment: .center, spacing: 10) {
                         Text("Carbs")
-                        Text("\(data.currentNutrition.carbs)/\(data.dailyNutrition.carbs)")
+                        Text("\(carbsToday)/\(data.dailyNutrition.carbs)")
                     }
                 }
 
@@ -109,7 +114,7 @@ struct HealthyCardWidget_Previews: PreviewProvider {
             entry: SimpleEntry(
                 date: Date(),
                 configuration: ConfigurationIntent(),
-                data: WidgetModel(currentNutrition: NutritionModel(), dailyNutrition: NutritionModel())
+                data: WidgetModel(todayProducts: [], dailyNutrition: NutritionModel())
             )
         )
             .previewContext(WidgetPreviewContext(family: .systemMedium))

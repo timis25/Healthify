@@ -5,12 +5,13 @@
         <attribute name="carbs" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="fats" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="protein" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProductCoreData" inverseName="nutritionCoreData" inverseEntity="ProductCoreData"/>
     </entity>
     <entity name="ProductCoreData" representedClassName="ProductCoreData" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="note" optional="YES" attributeType="String"/>
-        <relationship name="nutritionCoreData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NutritionCoreData"/>
+        <relationship name="nutritionCoreData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NutritionCoreData" inverseName="relationship" inverseEntity="NutritionCoreData"/>
     </entity>
     <entity name="UserCoreData" representedClassName="UserCoreData" syncable="YES" codeGenerationType="class">
         <attribute name="birthday" attributeType="Date" defaultDateTimeInterval="0" usesScalarValueType="NO"/>

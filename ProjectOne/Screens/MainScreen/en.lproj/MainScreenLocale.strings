@@ -1,0 +1,12 @@
+/* 
+  MainScreenLocale.strings
+  ProjectOne
+
+  Created by Timur Israilov on 30/08/23.
+  
+*/
+
+Welcome.Text = "Good day";
+Main.Title = "Main";
+Main.LastDishes = "     The last 10 dishes you ate:    ";
+Main.DayliCallories = "Daily calorie intake:";

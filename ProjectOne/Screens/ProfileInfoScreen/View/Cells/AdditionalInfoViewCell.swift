@@ -56,7 +56,9 @@ final class AdditionalInfoViewCell: UITableViewCell {
     }
 
     private func configureSelectorSex() {
-        self.selectorSex = UISegmentedControl(items: [R.string.locales.profileMale(), R.string.locales.profileFemale()])
+        self.selectorSex = UISegmentedControl(
+            items: [R.string.profileInfoLocale.profileMale(), R.string.profileInfoLocale.profileFemale()]
+        )
         view.addSubview(selectorSex)
         selectorSex.backgroundColor = UIColor(hex: "#90e0ef", alpha: 1)
         selectorSex.selectedSegmentIndex = 0
@@ -64,18 +66,17 @@ final class AdditionalInfoViewCell: UITableViewCell {
         delegate?.sendSex(isMale: true)
         selectorSex.addTarget(self, action: #selector(selectorSexAction), for: .valueChanged)
         selectorSex.snp.makeConstraints { make in
-            make.width.equalToSuperview().inset(20)
-            make.left.equalTo(20)
+            make.left.right.equalToSuperview().inset(20)
             make.top.equalTo(mainLabel.snp.bottom).offset(20)
         }
     }
 
     private func setPickerData() {
-        pickerData.append(PhysicalStateModel(id: 0, description: R.string.locales.physxState1()))
-        pickerData.append(PhysicalStateModel(id: 1, description: R.string.locales.physxState2()))
-        pickerData.append(PhysicalStateModel(id: 2, description: R.string.locales.physxState3()))
-        pickerData.append(PhysicalStateModel(id: 3, description: R.string.locales.physxState4()))
-        pickerData.append(PhysicalStateModel(id: 4, description: R.string.locales.physxState5()))
+        pickerData.append(PhysicalStateModel(id: 0, description: R.string.generalLocale.physxState1()))
+        pickerData.append(PhysicalStateModel(id: 1, description: R.string.generalLocale.physxState2()))
+        pickerData.append(PhysicalStateModel(id: 2, description: R.string.generalLocale.physxState3()))
+        pickerData.append(PhysicalStateModel(id: 3, description: R.string.generalLocale.physxState4()))
+        pickerData.append(PhysicalStateModel(id: 4, description: R.string.generalLocale.physxState5()))
     }
 
     private func configurePhyscPicker() {
@@ -86,11 +87,11 @@ final class AdditionalInfoViewCell: UITableViewCell {
     private func configureMainLabel() {
         view.addSubview(mainLabel)
 
-        mainLabel.text = R.string.locales.profileAdditionalInfo()
+        mainLabel.text = R.string.profileInfoLocale.profileAdditionalInfo()
         mainLabel.font = .systemFont(ofSize: 20)
         mainLabel.textColor = .white
         mainLabel.snp.makeConstraints { make in
-            make.top.equalTo(5)
+            make.top.equalToSuperview().offset(5)
             make.centerX.equalToSuperview()
         }
     }
@@ -104,15 +105,14 @@ final class AdditionalInfoViewCell: UITableViewCell {
         physicalStateTextField.layer.cornerRadius = 10
         physicalStateTextField.isScrollEnabled = false
         physicalStateTextField.delegate = self
-        physicalStateTextField.text = R.string.locales.profileEnterPhysxState()
+        physicalStateTextField.text = R.string.profileInfoLocale.profileEnterPhysxState()
         physicalStateTextField.textColor = .black
         physicalStateTextField.inputAccessoryView = toolBar
 
         physicalStateTextField.snp.makeConstraints { make in
-            make.bottom.equalTo(-10)
+            make.bottom.equalToSuperview().offset(-10)
             make.top.equalTo(selectorSex.snp.bottom).offset(10)
-            make.width.equalToSuperview().inset(5)
-            make.left.equalTo(5)
+            make.left.right.equalToSuperview().inset(5)
         }
     }
 
@@ -124,10 +124,8 @@ final class AdditionalInfoViewCell: UITableViewCell {
         view.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
 
         view.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.width.equalToSuperview().inset(25)
-            make.left.equalTo(25)
-            make.bottom.equalToSuperview()
+            make.top.bottom.equalToSuperview()
+            make.left.right.equalToSuperview().inset(25)
         }
     }
 
@@ -186,7 +184,7 @@ extension AdditionalInfoViewCell: UITextViewDelegate {
     }
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
-            textView.text = "Введите свою физическую активность"
+            textView.text = R.string.profileInfoLocale.profileSelectPhysicalActivity()
             textView.textColor = .lightGray
         }
     }

@@ -39,7 +39,7 @@ final class ProfileInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        title = R.string.locales.profileTitleFillForm()
+        title = R.string.profileInfoLocale.profileTitleFillForm()
         configureTableView()
         configureStandartNavBar()
     }

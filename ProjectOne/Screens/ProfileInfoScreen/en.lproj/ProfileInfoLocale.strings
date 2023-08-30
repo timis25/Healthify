@@ -1,0 +1,23 @@
+/* 
+  ProfileInfoLocale.strings
+  ProjectOne
+
+  Created by Timur Israilov on 30/08/23.
+  
+*/
+
+Profile.Name = "Your name";
+Profile.Enter.Name = "Enter your name...";
+Profile.Height = "Your height";
+Profile.Enter.Height = "Enter your height...";
+Profile.Weight = "Your weight";
+Profile.Enter.Weight = "Enter your weight...";
+Profile.Birthday = "Your birthday";
+Profile.Enter.Birthday = "Enter your birthday";
+Profile.AdditionalInfo = "Additional Information";
+Profile.Enter.PhysxState = "Enter physical state...";
+Profile.Male = "Male";
+Profile.Female = "Female";
+Profile.Start = "Start";
+Profile.Title.FillForm = "Filling out the form";
+Profile.Select.PhysicalActivity = "Select your physical activity";

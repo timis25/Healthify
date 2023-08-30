@@ -1,0 +1,12 @@
+PhysxState1 = "You are not physically active and have a sedentary job.";
+PhysxState2 = "Doing short runs or light gymnastics";
+PhysxState3 = "You do sports with average loads 3-5 times a week";
+PhysxState4 = "You exercise fully 6-7 times a week";
+PhysxState5 = "Your work is related to physical labor, you train 2 times a day and include strength exercises in your training program";
+Unit.Weight = "Kg";
+Unit.Height = "Сm";
+Unit.Carbs = "Carbs";
+Unit.Protein = "Protein";
+Unit.Fats = "Fats";
+Unit.Weight.Gr = "Gr";
+Unit.Callories = "Kkal";

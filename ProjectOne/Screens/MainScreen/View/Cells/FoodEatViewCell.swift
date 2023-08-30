@@ -30,7 +30,7 @@ final class FoodEatViewCell: UITableViewCell {
     public func setData(_ model: ProductModel) {
         let dateFormater = DateFormatter()
         dateFormater.dateFormat = "dd.MMMM.yy  HH:mm"
-        calloriesLabel.text = "\(model.nutrition.callories)\(R.string.locales.unitCallories())"
+        calloriesLabel.text = "\(model.nutrition.callories)\(R.string.generalLocale.unitCallories())"
         dishNameLabel.text = model.productName
         dateLabel.text = dateFormater.string(from: model.productDate)
     }
@@ -53,7 +53,7 @@ final class FoodEatViewCell: UITableViewCell {
         calloriesLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.width.equalTo(dishNameLabel.snp.width).inset(50)
-            make.right.equalTo(-16)
+            make.right.equalToSuperview().offset(-16)
         }
     }
 
@@ -65,8 +65,8 @@ final class FoodEatViewCell: UITableViewCell {
 
         dateLabel.snp.makeConstraints { make in
             make.top.equalTo(dishNameLabel.snp.bottom).offset(10)
-            make.bottom.equalTo(-10)
-            make.left.equalTo(16)
+            make.bottom.equalToSuperview().offset(-10)
+            make.left.equalToSuperview().offset(16)
         }
     }
 
@@ -79,8 +79,8 @@ final class FoodEatViewCell: UITableViewCell {
         dishNameLabel.lineBreakMode = .byWordWrapping
 
         dishNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(10)
-            make.left.equalTo(16)
+            make.top.equalToSuperview().offset(10)
+            make.left.equalToSuperview().offset(16)
             make.width.equalToSuperview().inset(85)
         }
     }
@@ -95,8 +95,7 @@ final class FoodEatViewCell: UITableViewCell {
         cardView.layer.shadowOpacity = 8
 
         cardView.snp.makeConstraints { make in
-            make.width.equalToSuperview().inset(9)
-            make.left.equalTo(9)
+            make.left.right.equalToSuperview().inset(9)
             make.top.equalToSuperview().offset(20)
             make.bottom.equalToSuperview().offset(-5)
         }

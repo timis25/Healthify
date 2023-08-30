@@ -10,14 +10,12 @@ import UIKit
 extension UIView {
     func configureCardViewGradient(colorTop: UIColor, colorBottom: UIColor) {
         let gradientLayer = CAGradientLayer()
-        let colorTop = colorTop.cgColor
-        let colorBottom = colorBottom.cgColor
-
-        gradientLayer.colors = [colorTop, colorBottom]
-        gradientLayer.locations = [0.5, 1.0]
-
         gradientLayer.frame = bounds
-        gradientLayer.cornerRadius = 10
+        gradientLayer.colors = [colorTop, colorBottom]
+
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+
         layer.insertSublayer(gradientLayer, at: 0)
     }
 }

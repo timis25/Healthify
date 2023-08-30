@@ -29,35 +29,31 @@ final class CardCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    // MARK: - Override methods
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        let colorTop = UIColor(hex: "#0583D2", alpha: 1)
-        let colorBottom = UIColor(hex: "#61B0B7", alpha: 1)
-
-        cardView.configureCardViewGradient(colorTop: colorTop, colorBottom: colorBottom)
-    }
 
     // MARK: - Public methods
     public func setData(_ model: MainViewModel) {
-        let currentNutrition = model.currentNutrition
         let dailyNutrition = model.dailyNutrition
 
-        carbsCountLabel.text = "\(dailyNutrition.carbs)/\(currentNutrition.carbs)\(R.string.locales.unitWeightGr())"
+        let carbsToday = model.todayProducts.map { $0.nutrition.carbs }.reduce(0, +)
+        let fatsToday = model.todayProducts.map { $0.nutrition.fats }.reduce(0, +)
+        let proteinsToday = model.todayProducts.map { $0.nutrition.proteins }.reduce(0, +)
 
-        fatsCountLabel.text = "\(dailyNutrition.fats)/\(currentNutrition.fats)\(R.string.locales.unitWeightGr())"
+        let carbsRatioText = "\(carbsToday)/\(dailyNutrition.carbs)"
+        carbsCountLabel.text = "\(carbsRatioText)\(R.string.generalLocale.unitWeightGr())"
 
-        let proteinsRatioText = "\(dailyNutrition.proteins)/\(currentNutrition.proteins)"
-        proteinCountLabel.text = "\(proteinsRatioText)\(R.string.locales.unitWeightGr())"
+        fatsCountLabel.text = "\(fatsToday)/\(dailyNutrition.fats)\(R.string.generalLocale.unitWeightGr())"
 
-        let nowProtein = Double(currentNutrition.proteins)
-        let dailyProteins = Double(dailyNutrition.proteins)
+        let proteinsRatioText = "\(proteinsToday)/\(dailyNutrition.proteins)"
+        proteinCountLabel.text = "\(proteinsRatioText)\(R.string.generalLocale.unitWeightGr())"
+
+        let nowProtein = Double(dailyNutrition.proteins)
+        let dailyProteins = Double(proteinsToday)
         let proteinProgress = dailyProteins / nowProtein
-        let nowFats = Double(currentNutrition.fats)
-        let dailyFats = Double(dailyNutrition.fats)
+        let nowFats = Double(dailyNutrition.fats)
+        let dailyFats = Double(fatsToday)
         let fatsProgress = dailyFats / nowFats
-        let nowCarbs = Double(currentNutrition.carbs)
-        let dailyCarbs = Double(dailyNutrition.carbs)
+        let nowCarbs = Double(dailyNutrition.carbs)
+        let dailyCarbs = Double(carbsToday)
         let carbsProgress = dailyCarbs / nowCarbs
 
         fatsProgressView.progress = Float(fatsProgress)
@@ -91,7 +87,7 @@ final class CardCell: UITableViewCell {
         carbsCountLabel.snp.makeConstraints { make in
             make.top.equalTo(carbsProgressView.snp.bottom).offset(15)
             make.centerX.equalTo(carbsLabel.snp.centerX)
-            make.right.equalTo(-16)
+            make.right.equalToSuperview().offset(-16)
         }
     }
 
@@ -118,7 +114,7 @@ final class CardCell: UITableViewCell {
         proteinCountLabel.snp.makeConstraints { make in
             make.top.equalTo(proteinProgressView.snp.bottom).offset(15)
             make.centerX.equalTo(proteinLabel.snp.centerX)
-            make.left.equalTo(16)
+            make.left.equalToSuperview().offset(16)
         }
     }
 
@@ -173,26 +169,26 @@ final class CardCell: UITableViewCell {
     private func configureCarbsLabel() {
         cardView.addSubview(carbsLabel)
 
-        carbsLabel.text = R.string.locales.unitCarbs()
+        carbsLabel.text = R.string.generalLocale.unitCarbs()
         carbsLabel.textColor = .white
         carbsLabel.textAlignment = .center
 
         carbsLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(-80)
+            make.bottom.equalToSuperview().offset(-80)
             make.width.greaterThanOrEqualTo(85)
-            make.right.equalTo(-16)
+            make.right.equalToSuperview().offset(-16)
         }
     }
 
     private func configureFatsLabel() {
         cardView.addSubview(fatsLabel)
 
-        fatsLabel.text = R.string.locales.unitFats()
+        fatsLabel.text = R.string.generalLocale.unitFats()
         fatsLabel.textColor = .white
         fatsLabel.textAlignment = .center
 
         fatsLabel.snp.makeConstraints { make in
-            make.top.equalTo(20)
+            make.top.equalToSuperview().offset(20)
             make.width.equalTo(85)
             make.centerX.equalToSuperview()
         }
@@ -201,7 +197,7 @@ final class CardCell: UITableViewCell {
     private func configureProteinLabel() {
         cardView.addSubview(proteinLabel)
 
-        proteinLabel.text = R.string.locales.unitProtein()
+        proteinLabel.text = R.string.generalLocale.unitProtein()
         proteinLabel.textColor = .white
         proteinLabel.font = .systemFont(ofSize: 20)
         proteinLabel.textAlignment = .center
@@ -215,16 +211,15 @@ final class CardCell: UITableViewCell {
 
     private func configureCardView() {
         contentView.addSubview(cardView)
-        cardView.backgroundColor = .white
+        cardView.backgroundColor = UIColor(hex: "#61B0B7", alpha: 1)
         cardView.layer.cornerRadius = 10
         cardView.layer.shadowOffset = .zero
-        cardView.layer.shadowColor = UIColor(hex: "#0583D2", alpha: 1).cgColor
+        cardView.layer.shadowColor = UIColor(hex: "#61B0B7", alpha: 1).cgColor
         cardView.layer.shadowRadius = 5
         cardView.layer.shadowOpacity = 3
 
         cardView.snp.makeConstraints { make in
-            make.width.equalToSuperview().inset(9)
-            make.left.equalTo(9)
+            make.left.right.equalToSuperview().inset(9)
             make.top.equalToSuperview().offset(10)
             make.height.equalTo(250)
             make.bottom.equalToSuperview().offset(-15)

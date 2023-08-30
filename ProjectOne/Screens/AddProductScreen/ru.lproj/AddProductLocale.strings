@@ -1,0 +1,12 @@
+/* 
+  AddProductLocale.strings
+  ProjectOne
+
+  Created by Timur Israilov on 30/08/23.
+  
+*/
+
+AddProduct.Title = "Добавление блюда";
+AddProduct.Name = "Название блюда";
+AddProduct.DishCallories = "Каллорийность блюда";
+AddProduct.AddButton = "Добавить блюдо";

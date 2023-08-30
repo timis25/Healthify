@@ -8,9 +8,6 @@
 import Foundation
 import WidgetKit
 
-protocol MainViewProtocol: AnyObject {
-}
-
 final class MainPresenter: MainPresenterProtocol {
     // MARK: - Public properties
     weak var view: MainViewProtocol?
@@ -27,16 +24,14 @@ final class MainPresenter: MainPresenterProtocol {
 
     // MARK: - Public methods
     func getModel() -> MainViewModel {
-        let dailyNutrition = getDayliNutrion()
-        let currentNutrition = getUserNutrionInfo()
+        let dailyNutrition = getUserNutrionInfo()
 
-        let widgetData = WidgetModel(currentNutrition: currentNutrition, dailyNutrition: dailyNutrition)
+        let widgetData = WidgetModel(todayProducts: [], dailyNutrition: dailyNutrition)
         UserSettings.addDataToWidget(widgetData)
         if #available(iOS 14.0, *) {
             WidgetCenter.shared.reloadAllTimelines()
         }
         return MainViewModel(
-            currentNutrition: currentNutrition,
             dailyNutrition: dailyNutrition,
             todayProducts: getProducts(),
             user: getUser()
@@ -85,11 +80,6 @@ final class MainPresenter: MainPresenterProtocol {
         return UserModel(userInfo)
     }
 
-    private func getDayliNutrion() -> NutritionModel {
-        guard let dayliNutrion = dataManager.getDayliNutrion()?.last else { return NutritionModel() }
-        return NutritionModel(dayliNutrion)
-    }
-
     private func getProducts() -> [ProductModel] {
         guard let products = dataManager.getProduct() else { return [] }
         return products.map({
@@ -127,9 +117,6 @@ final class MainPresenter: MainPresenterProtocol {
     }
 
     private func calcAge(birthday: Date) -> Int {
-        let dateFormater = DateFormatter()
-        dateFormater.dateFormat = "dd.MM.yyyy"
-        print(dateFormater.string(from: birthday))
         let calendar: NSCalendar! = NSCalendar(calendarIdentifier: .gregorian)
         let now = Date()
         let calcAge = calendar.components(.year, from: birthday, to: now, options: [])

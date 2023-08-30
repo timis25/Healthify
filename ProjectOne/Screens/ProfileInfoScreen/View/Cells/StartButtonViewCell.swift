@@ -31,15 +31,14 @@ final class StartButtonViewCell: UITableViewCell {
     private func configureStartButton() {
         contentView.addSubview(startButton)
 
-        startButton.setTitle(R.string.locales.profileStart(), for: .normal)
+        startButton.setTitle(R.string.profileInfoLocale.profileStart(), for: .normal)
         startButton.backgroundColor = UIColor(hex: "#0077b6", alpha: 1)
         startButton.addTarget(self, action: #selector(startButtonAction), for: .touchUpInside)
 
         startButton.snp.makeConstraints { make in
-            make.top.equalTo(150)
+            make.top.equalToSuperview().offset(150)
             make.bottom.equalToSuperview().offset(-20)
-            make.width.equalToSuperview().inset(30)
-            make.left.equalTo(30)
+            make.left.right.equalToSuperview().inset(30)
             make.height.equalTo(50)
         }
     }

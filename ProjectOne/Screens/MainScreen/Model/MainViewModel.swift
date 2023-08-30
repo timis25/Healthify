@@ -8,7 +8,6 @@
 import Foundation
 
 struct MainViewModel {
-    var currentNutrition: NutritionModel = NutritionModel()
     var dailyNutrition: NutritionModel = NutritionModel()
     var todayProducts: [ProductModel] = []
     var user: UserModel

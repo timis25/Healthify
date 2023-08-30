@@ -29,7 +29,6 @@ final class AddProductPresenter: AddProductPresenterProtocol {
     // MARK: - Public methods
     func addProduct(_ productModel: ProductModel) {
         dataManager.addProduct(productModel)
-        dataManager.updateDayliNutrition(productModel.nutrition)
         router.pop()
     }
 }

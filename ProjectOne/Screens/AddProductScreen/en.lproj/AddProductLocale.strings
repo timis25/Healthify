@@ -1,0 +1,12 @@
+/* 
+  AddProductLocale.strings
+  ProjectOne
+
+  Created by Timur Israilov on 30/08/23.
+  
+*/
+
+AddProduct.Title = "Adding a dish";
+AddProduct.Name = "Name of the dish";
+AddProduct.DishCallories = "Calorie content of the dish";
+AddProduct.AddButton = "Add dish";

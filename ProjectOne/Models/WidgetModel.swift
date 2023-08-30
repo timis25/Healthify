@@ -8,6 +8,6 @@
 import Foundation
 
 struct WidgetModel: Codable {
-    var currentNutrition: NutritionModel
+    var todayProducts: [ProductModel]
     var dailyNutrition: NutritionModel
 }

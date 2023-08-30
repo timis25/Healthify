@@ -45,8 +45,8 @@ final class NameViewCell: UITableViewCell {
         cellType = type
         switch type {
         case .name:
-            mainLabel.text = R.string.locales.profileName()
-            nameTextField.placeholder = R.string.locales.profileEnterName()
+            mainLabel.text = R.string.profileInfoLocale.profileName()
+            nameTextField.placeholder = R.string.profileInfoLocale.profileEnterName()
             view.snp.remakeConstraints { make in
                 make.top.equalTo(50)
                 make.width.equalToSuperview().inset(25)
@@ -55,17 +55,17 @@ final class NameViewCell: UITableViewCell {
             }
 
         case .weight:
-            unitString = R.string.locales.unitWeight()
-            mainLabel.text = R.string.locales.profileWeight()
-            nameTextField.placeholder = R.string.locales.profileEnterWeight()
+            unitString = R.string.generalLocale.unitWeight()
+            mainLabel.text = R.string.profileInfoLocale.profileWeight()
+            nameTextField.placeholder = R.string.profileInfoLocale.profileEnterWeight()
             view.layer.cornerRadius = 0
             nameTextField.keyboardType = .numberPad
 
         case .height:
-            unitString = R.string.locales.unitHeight()
-            mainLabel.text = R.string.locales.profileHeight()
+            unitString = R.string.generalLocale.unitHeight()
+            mainLabel.text = R.string.profileInfoLocale.profileHeight()
             view.layer.cornerRadius = 0
-            nameTextField.placeholder = R.string.locales.profileEnterHeight()
+            nameTextField.placeholder = R.string.profileInfoLocale.profileEnterHeight()
             nameTextField.keyboardType = .numberPad
         }
     }
@@ -77,7 +77,7 @@ final class NameViewCell: UITableViewCell {
         mainLabel.textColor = .white
         mainLabel.font = .systemFont(ofSize: 20)
         mainLabel.snp.makeConstraints { make in
-            make.top.equalTo(5)
+            make.top.equalToSuperview().offset(5)
             make.centerX.equalToSuperview()
         }
     }
@@ -89,8 +89,7 @@ final class NameViewCell: UITableViewCell {
 
         separator.snp.makeConstraints { make in
             make.height.equalTo(0.5)
-            make.bottom.equalToSuperview()
-            make.width.equalToSuperview()
+            make.left.right.bottom.equalToSuperview()
         }
     }
 
@@ -105,10 +104,9 @@ final class NameViewCell: UITableViewCell {
         nameTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingDidEnd)
 
         nameTextField.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(5)
+            make.bottom.equalToSuperview().offset(-5)
             make.top.equalTo(mainLabel.snp.bottom).offset(6)
-            make.width.equalToSuperview().inset(15)
-            make.left.equalTo(15)
+            make.left.right.equalToSuperview().inset(15)
         }
     }
 
@@ -131,10 +129,8 @@ final class NameViewCell: UITableViewCell {
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
 
         view.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.width.equalToSuperview().inset(25)
-            make.left.equalTo(25)
-            make.bottom.equalToSuperview()
+            make.top.bottom.equalToSuperview()
+            make.left.right.equalToSuperview().inset(25)
         }
     }
 

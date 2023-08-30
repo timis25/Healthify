@@ -77,11 +77,11 @@ final class AgeViewCell: UITableViewCell {
     private func configureMainLabel() {
         view.addSubview(mainLabel)
 
-        mainLabel.text = R.string.locales.profileBirthday()
+        mainLabel.text = R.string.profileInfoLocale.profileBirthday()
         mainLabel.textColor = .white
         mainLabel.font = .systemFont(ofSize: 20)
         mainLabel.snp.makeConstraints { make in
-            make.top.equalTo(5)
+            make.top.equalToSuperview().offset(5)
             make.centerX.equalToSuperview()
         }
     }
@@ -93,24 +93,22 @@ final class AgeViewCell: UITableViewCell {
 
         separator.snp.makeConstraints { make in
             make.height.equalTo(0.5)
-            make.bottom.equalToSuperview()
-            make.width.equalToSuperview()
+            make.left.right.bottom.equalToSuperview()
         }
     }
 
     private func configureNameTextField() {
         view.addSubview(ageTextField)
 
-        ageTextField.placeholder = R.string.locales.profileEnterBirthday()
+        ageTextField.placeholder = R.string.profileInfoLocale.profileEnterBirthday()
         ageTextField.backgroundColor = UIColor(hex: "#90e0ef", alpha: 1)
         ageTextField.layer.cornerRadius = 5
         ageTextField.font = .systemFont(ofSize: 18)
 
         ageTextField.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(5)
+            make.bottom.equalToSuperview().offset(-5)
             make.top.equalTo(mainLabel.snp.bottom).offset(6)
-            make.width.equalToSuperview().inset(15)
-            make.left.equalTo(15)
+            make.left.right.equalToSuperview().inset(15)
         }
     }
 
@@ -121,17 +119,14 @@ final class AgeViewCell: UITableViewCell {
 
         view.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(-3)
-            make.width.equalToSuperview().inset(25)
-            make.left.equalTo(25)
+            make.left.right.equalToSuperview().inset(25)
             make.bottom.equalToSuperview()
         }
     }
 
     // MARK: - Actions
     @objc private func doneBarAction() {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd.MM.yyyy"
-        let stringDate = dateFormatter.string(from: datePicker.date)
+        let stringDate = datePicker.date.toDate()
         ageTextField.text = stringDate
         delegate?.sendData(birthDate: stringDate)
         view.endEditing(true)

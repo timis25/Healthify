@@ -40,10 +40,6 @@ final class AddProductViewController: UIViewController {
         viewDidLoadSetup()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        viewDidAppearSetup()
-    }
     // MARK: - Private methods
     private func viewDidLoadSetup() {
         view.backgroundColor = .white
@@ -51,6 +47,12 @@ final class AddProductViewController: UIViewController {
         configureMainView()
         configureAddButton()
         configureHiddenKeyboard()
+        configureMainLabel()
+        configureFatsTextField()
+        configureProteinTextField()
+        configureCarbsTextField()
+        configureCalloriesTextField()
+        configureProductNameTextField()
     }
 
     private func configureHiddenKeyboard() {
@@ -58,29 +60,16 @@ final class AddProductViewController: UIViewController {
         view.addGestureRecognizer(tap)
     }
 
-    private func viewDidAppearSetup() {
-        configureMainLabel()
-        configureFatsTextField()
-        configureProteinTextField()
-        configureCarbsTextField()
-        configureCalloriesTextField()
-        configureProductNameTextField()
-
-        let topColor = UIColor(hex: "#0583D2", alpha: 1)
-        let bottomColor = UIColor(hex: "#61B0B7", alpha: 1)
-        mainView.configureCardViewGradient(colorTop: topColor, colorBottom: bottomColor)
-        addButton.configureCardViewGradient(colorTop: bottomColor, colorBottom: topColor)
-        addButton.setTitle(R.string.locales.addProductAddButton(), for: .normal)
-    }
-
     private func configureAddButton() {
         view.addSubview(addButton)
+
+        addButton.backgroundColor = UIColor(hex: "#61B0B7", alpha: 1)
         addButton.addTarget(self, action: #selector(addButtonAction), for: .touchUpInside)
+        addButton.setTitle(R.string.addProductLocale.addProductAddButton(), for: .normal)
 
         addButton.snp.makeConstraints { make in
             make.top.equalTo(mainView.snp.bottom).offset(100)
-            make.width.equalToSuperview().inset(30)
-            make.left.equalTo(30)
+            make.left.right.equalToSuperview().inset(30)
             make.height.equalTo(50)
         }
     }
@@ -90,7 +79,7 @@ final class AddProductViewController: UIViewController {
 
         productNameTextField.backgroundColor = .clear
         productNameTextField.layer.cornerRadius = 5
-        productNameTextField.placeholder = R.string.locales.addProductName()
+        productNameTextField.placeholder = R.string.addProductLocale.addProductName()
         productNameTextField.textAlignment = .center
         productNameTextField.textColor = .white
 
@@ -106,7 +95,7 @@ final class AddProductViewController: UIViewController {
 
         calloriesTextField.backgroundColor = .clear
         calloriesTextField.layer.cornerRadius = 5
-        calloriesTextField.placeholder = R.string.locales.addProductDishCallories()
+        calloriesTextField.placeholder = R.string.addProductLocale.addProductDishCallories()
         calloriesTextField.textAlignment = .center
         calloriesTextField.textColor = .white
         calloriesTextField.keyboardType = .numberPad
@@ -122,16 +111,16 @@ final class AddProductViewController: UIViewController {
     private func configureMainView() {
         view.addSubview(mainView)
 
+        mainView.backgroundColor = UIColor(hex: "#61B0B7", alpha: 1)
         mainView.layer.cornerRadius = 10
         mainView.layer.shadowOffset = .zero
-        mainView.layer.shadowColor = UIColor(hex: "#0583D2", alpha: 1).cgColor
+        mainView.layer.shadowColor = UIColor(hex: "#61B0B7", alpha: 1).cgColor
         mainView.layer.shadowRadius = 5
         mainView.layer.shadowOpacity = 3
 
         mainView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(0)
-            make.right.equalTo(-16)
-            make.left.equalTo(16)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
+            make.left.right.equalToSuperview().inset(16)
             make.height.equalTo(200)
         }
     }
@@ -139,12 +128,12 @@ final class AddProductViewController: UIViewController {
     private func configureMainLabel() {
         mainView.addSubview(mainLabel)
 
-        mainLabel.text = R.string.locales.addProductTitle()
+        mainLabel.text = R.string.addProductLocale.addProductTitle()
         mainLabel.textColor = .white
         mainLabel.font = .systemFont(ofSize: 20)
 
         mainLabel.snp.makeConstraints { make in
-            make.top.equalTo(20)
+            make.top.equalToSuperview().offset(20)
             make.centerX.equalToSuperview()
         }
     }
@@ -153,7 +142,7 @@ final class AddProductViewController: UIViewController {
         mainView.addSubview(fatsTextField)
 
         fatsTextField.backgroundColor = .clear
-        fatsTextField.placeholder = R.string.locales.unitFats()
+        fatsTextField.placeholder = R.string.generalLocale.unitFats()
         fatsTextField.textAlignment = .center
         fatsTextField.layer.cornerRadius = 5
         fatsTextField.textColor = .white
@@ -171,7 +160,7 @@ final class AddProductViewController: UIViewController {
         mainView.addSubview(proteinTextField)
 
         proteinTextField.backgroundColor = .clear
-        proteinTextField.placeholder = R.string.locales.unitProtein()
+        proteinTextField.placeholder = R.string.generalLocale.unitProtein()
         proteinTextField.textAlignment = .center
         proteinTextField.layer.cornerRadius = 5
         proteinTextField.textColor = .white
@@ -190,7 +179,7 @@ final class AddProductViewController: UIViewController {
 
         carbsTextField.backgroundColor = .clear
         carbsTextField.layer.cornerRadius = 5
-        carbsTextField.placeholder = R.string.locales.unitCarbs()
+        carbsTextField.placeholder = R.string.generalLocale.unitCarbs()
         carbsTextField.textAlignment = .center
         carbsTextField.textColor = .white
         carbsTextField.keyboardType = .numberPad
@@ -202,11 +191,8 @@ final class AddProductViewController: UIViewController {
             make.width.equalTo(100)
         }
     }
-}
-
-private extension AddProductViewController {
     // MARK: - Actions
-    @objc func addButtonAction() {
+    @objc private func addButtonAction() {
         guard let calloriesText = calloriesTextField.text,
               let fatsText = fatsTextField.text,
               let carbsText = carbsTextField.text,
@@ -227,14 +213,16 @@ private extension AddProductViewController {
         presenter.addProduct(productModel)
     }
 
-    @objc func dismissKeyboardAction() {
+    @objc private func dismissKeyboardAction() {
         view.endEditing(true)
     }
 }
 
+// MARK: - AddProductViewProtocol
 extension AddProductViewController: AddProductViewProtocol {
 }
 
+// MARK: - UITextFieldDelegate
 extension AddProductViewController: UITextFieldDelegate {
     func textField(
         _ textField: UITextField,
@@ -242,9 +230,9 @@ extension AddProductViewController: UITextFieldDelegate {
         replacementString string: String
     ) -> Bool {
         var unitString: String {
-            return textField.placeholder == R.string.locales.addProductDishCallories() ?
-                   R.string.locales.unitCallories() :
-                   R.string.locales.unitWeightGr()
+            return textField == calloriesTextField ?
+            R.string.generalLocale.unitCallories() :
+            R.string.generalLocale.unitWeightGr()
         }
 
         let newLength = textField.text!.count + string.count - range.length
@@ -254,7 +242,7 @@ extension AddProductViewController: UITextFieldDelegate {
         }
 
         if var textString = textField.text {
-            let maxLength = textField.placeholder == R.string.locales.addProductDishCallories() ? 9 : 5
+            let maxLength = textField == calloriesTextField ? 9 : 5
 
             if textString.contains(unitString) && newLength <= maxLength {
                 textString = textString.replacingOccurrences(of: unitString, with: "")

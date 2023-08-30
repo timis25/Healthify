@@ -39,18 +39,21 @@ final class MainViewController: UIViewController {
     // MARK: - Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewDidLoadSetup()
+        setupUI()
+        refreshAction()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
     // MARK: - Private methods
-    private func viewDidLoadSetup() {
+    private func setupUI() {
         view.backgroundColor = .white
-        model = presenter.getModel()
         configureNavgationView()
         configureWelcomeLabel()
         configureTableView()
         configureStandartNavBar()
-        tableView.reloadData()
     }
 
     private func configureTableView() {
@@ -74,7 +77,7 @@ final class MainViewController: UIViewController {
 
     private func configureWelcomeLabel() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: welcomeLabel)
-        welcomeLabel.text = "Good morning"
+        welcomeLabel.text = R.string.mainScreenLocale.welcomeText()
         welcomeLabel.textColor = UIColor(red: 0.769, green: 0.769, blue: 0.769, alpha: 1)
     }
 
@@ -88,24 +91,25 @@ final class MainViewController: UIViewController {
         )
         navigationItem.rightBarButtonItem = addBarButtonItem
     }
-}
 
-private extension MainViewController {
     // MARK: - Actions
-    @objc func addProductAction() {
+    @objc private func addProductAction() {
         presenter.goToAddProduct()
     }
 
-    @objc func refreshAction() {
+    @objc private func refreshAction() {
         model = presenter.getModel()
+        title = model.user.name
         tableView.reloadData()
         refreshControll.endRefreshing()
     }
 }
 
+// MARK: - MainViewProtocol
 extension MainViewController: MainViewProtocol {
 }
 
+// MARK: - UITableViewDataSource, UITableViewDelegate
 extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
@@ -128,7 +132,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
             let label = UILabel()
             label.textColor = .gray
             label.font = .systemFont(ofSize: 18)
-            label.text = R.string.locales.mainLastDishes()
+            label.text = R.string.mainScreenLocale.mainLastDishes()
             return label
         }
 

@@ -12,6 +12,4 @@ protocol DataStoreManagerProtocol {
     func getUser() -> [UserCoreData]?
     func getProduct() -> [ProductCoreData]?
     func addProduct(_ model: ProductModel)
-    func getDayliNutrion() -> [NutritionCoreData]?
-    func updateDayliNutrition(_ model: NutritionModel)
 }
